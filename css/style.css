@@ -1,0 +1,162 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+/* glitch */
+.glitch {
+  text-shadow: 0.05em 0 0 rgba(255, 0, 0, 0.75),
+    -0.025em -0.05em 0 rgba(0, 255, 0, 0.75),
+    0.025em 0.05em 0 rgba(0, 0, 255, 0.75);
+}
+
+.glitch:hover {
+  animation: glitch 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+}
+
+@keyframes glitch {
+  0% { transform: translate(0); }
+  20% { transform: translate(-4px, 4px); }
+  40% { transform: translate(-4px, -4px); }
+  60% { transform: translate(4px, 4px); }
+  80% { transform: translate(4px, -4px); }
+  100% { transform: translate(0); }
+  
+}
+
+/* numbers */
+.data {
+  height: 100px;
+  width: 100px;
+  align-items: center;
+  color: white;
+  font-size: x-large;
+  font-weight: 500;
+  text-align: center;
+}
+
+/* stomach bg */
+.stomach {
+  background-image: url("../img/bg/bg3.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  min-height: 700px;
+}
+
+/* card */
+.card {
+  border: none;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 26rem;
+  margin: 1rem auto;
+}
+
+.del {
+  color: grey;
+}
+
+.btn {
+  background-color: #a82c48;
+  color: white;
+}
+
+.carousel-item {
+  margin-top: 3rem;
+  padding: 2rem 1rem; /* reduced for responsiveness */
+  background-color: white;
+  border-radius: 0.9373rem;
+  text-align: center;
+}
+
+.face {
+  height: 100px;
+  width: 120px;
+  border: 1px solid;
+  border-radius: 50%;
+}
+
+/* testimonial */
+.testimonial {
+  padding: 10px 10px;
+}
+
+.testimonial img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #eee;
+}
+
+.testimonial-text {
+  font-style: italic;
+  color: #444;
+}
+
+.testimonial-name {
+  font-weight: bold;
+}
+
+.stars i {
+  color: #f4c542; /* gold stars */
+}
+
+/* iframe fix */
+iframe {
+  max-width: 100%;
+  display: block;
+}
+.btn{
+  background-color:#a82c48;
+}
+/* nav */
+.navbar .nav-link {
+  position: relative;
+}
+
+.navbar .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0;
+  height: 2px;
+  background-color:#a82c48;
+  transition: width 0.3s ease;
+}
+
+.navbar .nav-link:hover::after {
+  width: 100%;
+}
+.navbar a{
+  color: #a82c48;
+}
+@media only  screen and (max-width:455px) {
+  body{
+    background-color: red;
+  }
+  }
+  .slidebar{
+    position: relative;
+  }
+  .slidebar .slide {
+    position: absolute;
+    height: 450px;
+    width: 540px;
+    /* right: 6%; */
+    right: -40%;
+    transition: all 0.5s ease-in;
+    /* border: 2px solid black; */
+  }
+  .slidebar .slide img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
