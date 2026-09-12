@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>404 — Page Not Found | FOODIES.COM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/darkmode.css" />
+  <link rel="stylesheet" href="css/modern.css" />
+  <script>(function(){const t=localStorage.getItem('foodies_theme');if(t==='dark'||(t==null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')})();</script>
+  <style>
+    :root { --primary: #c0392b; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #0d0d0d;
+      color: white;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; padding: 24px;
+    }
+    .wrapper { max-width: 520px; }
+    .emoji { font-size: 5rem; margin-bottom: 24px; display: block;
+      animation: bounce 2s ease-in-out infinite; }
+    @keyframes bounce { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-16px); } }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 15vw, 8rem); font-weight: 900;
+      color: var(--primary); line-height: 1; margin-bottom: 8px;
+    }
+    h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.4rem, 4vw, 2rem); font-weight: 700;
+      margin-bottom: 16px;
+    }
+    p { color: rgba(255,255,255,0.55); font-size: 1rem; line-height: 1.7; margin-bottom: 36px; }
+    .btn-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-home {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--primary); color: white;
+      padding: 13px 28px; border-radius: 50px;
+      font-weight: 700; font-size: 0.93rem;
+      text-decoration: none; transition: all 0.3s ease;
+    }
+    .btn-home:hover { background: #922b21; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,57,43,0.4); color: white; }
+    .btn-back {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.7);
+      padding: 13px 28px; border-radius: 50px;
+      font-weight: 600; font-size: 0.93rem;
+      text-decoration: none; transition: all 0.3s ease;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+    .btn-back:hover { background: rgba(255,255,255,0.12); color: white; }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; font-weight: 800;
+      color: white; text-decoration: none;
+      display: block; margin-bottom: 48px;
+    }
+    .logo span { color: var(--primary); }
+  </style>
+</head>
+<body>
+  <div class="wrapper">
+    <a href="index.html" class="logo">FOODIES<span>.</span>COM</a>
+    <span class="emoji">🍽️</span>
+    <h1>404</h1>
+    <h2>Page Not Found</h2>
+    <p>Looks like this page went out for delivery and never came back.<br>Let's get you back to something delicious.</p>
+    <div class="btn-group">
+      <a href="index.html" class="btn-home"><i class="bi bi-house-fill"></i> Go Home</a>
+      <a href="javascript:history.back()" class="btn-back"><i class="bi bi-arrow-left"></i> Go Back</a>
+    </div>
+  </div>
+  <script src="js/darkmode.js"></script>
+</body>
+</html>

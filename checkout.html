@@ -1,0 +1,268 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout — FOODIES.COM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/checkout.css" />
+  <link rel="stylesheet" href="css/darkmode.css" />
+  <link rel="stylesheet" href="css/modern.css" />
+  <script>(function(){const t=localStorage.getItem('foodies_theme');if(t==='dark'||(t==null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')})();</script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="co-nav">
+    <div class="container d-flex align-items-center justify-content-between py-3">
+      <a href="index.html" class="co-logo">FOODIES<span>.</span>COM</a>
+      <div class="co-steps">
+        <div class="co-step active"><span>1</span> Cart</div>
+        <div class="co-step-line"></div>
+        <div class="co-step active" id="step2"><span>2</span> Delivery</div>
+        <div class="co-step-line"></div>
+        <div class="co-step" id="step3"><span>3</span> Payment</div>
+      </div>
+      <a href="index.html" class="co-back-link"><i class="bi bi-arrow-left"></i> Continue Shopping</a>
+      <button class="dark-toggle ms-2" data-dark-toggle title="Toggle Dark Mode" style="border-color:rgba(0,0,0,0.15);color:#666;">
+        <i class="bi bi-moon-fill"></i>
+      </button>
+    </div>
+  </nav>
+
+  <div class="container co-container">
+    <div class="row g-4">
+
+      <!-- LEFT: Delivery + Payment -->
+      <div class="col-lg-7">
+
+        <!-- Delivery Details -->
+        <div class="co-card" id="deliverySection">
+          <div class="co-card-header">
+            <div class="co-card-icon"><i class="bi bi-geo-alt-fill"></i></div>
+            <div>
+              <h4>Delivery Address</h4>
+              <p>Where should we deliver your order?</p>
+            </div>
+          </div>
+          <div class="co-card-body">
+            <div class="row g-3">
+              <!-- Saved Address Quick Fill -->
+              <div class="col-12" id="savedAddressBar" style="display:none;">
+                <div class="saved-addr-bar">
+                  <i class="bi bi-geo-alt-fill" style="color:#c0392b;font-size:1.1rem;"></i>
+                  <div style="flex:1;">
+                    <strong style="font-size:0.85rem;">Use Saved Address</strong>
+                    <p style="font-size:0.78rem;color:#888;margin:0;" id="savedAddrPreview"></p>
+                  </div>
+                  <button class="co-coupon-btn" style="padding:8px 16px;font-size:0.8rem;" onclick="fillSavedAddress()">Use</button>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <label class="co-label">Full Name *</label>
+                <input type="text" class="co-input" id="delName" placeholder="Anuj Gupta" required>
+                <span class="co-err" id="delNameErr"></span>
+              </div>
+              <div class="col-sm-6">
+                <label class="co-label">Phone Number *</label>
+                <input type="tel" class="co-input" id="delPhone" placeholder="+91 9876543210" required>
+                <span class="co-err" id="delPhoneErr"></span>
+              </div>
+              <div class="col-12">
+                <label class="co-label">Street Address *</label>
+                <input type="text" class="co-input" id="delStreet" placeholder="House No, Street, Area" required>
+                <span class="co-err" id="delStreetErr"></span>
+              </div>
+              <div class="col-sm-6">
+                <label class="co-label">City *</label>
+                <input type="text" class="co-input" id="delCity" placeholder="Lucknow" required>
+              </div>
+              <div class="col-sm-3">
+                <label class="co-label">State *</label>
+                <input type="text" class="co-input" id="delState" placeholder="UP" required>
+              </div>
+              <div class="col-sm-3">
+                <label class="co-label">Pincode *</label>
+                <input type="text" class="co-input" id="delPincode" placeholder="226001" required>
+              </div>
+              <!-- Save address checkbox -->
+              <div class="col-12">
+                <div style="display:flex;align-items:center;gap:10px;margin-top:4px;">
+                  <input type="checkbox" id="saveAddressChk" style="width:16px;height:16px;accent-color:#c0392b;cursor:pointer;">
+                  <label for="saveAddressChk" style="margin:0;cursor:pointer;font-size:0.85rem;color:#666;">Save this address for future orders</label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+          <!-- Loyalty Points -->
+        <div class="co-card mt-3" id="loyaltyCard" style="display:none;">
+          <div class="co-card-header">
+            <div class="co-card-icon" style="background:linear-gradient(135deg,#f39c12,#e67e22);"><i class="bi bi-trophy-fill"></i></div>
+            <div>
+              <h4>🏆 Loyalty Points</h4>
+              <p>You have <strong id="coLoyaltyPts">0</strong> points (≈ ₹<span id="coLoyaltyVal">0</span> off)</p>
+            </div>
+          </div>
+          <div class="co-card-body">
+            <div style="background:#fff8e1;border-radius:12px;padding:12px 14px;margin-bottom:12px;font-size:0.82rem;color:#856404;border:1px solid #ffe082;">
+              💡 <strong>How to use:</strong> Check the box below to apply ₹<span id="redeemAmt">0</span> discount using your points. Minimum 100 points needed.
+            </div>
+            <div style="display:flex;align-items:center;gap:12px;">
+              <input type="checkbox" id="redeemPoints" onchange="toggleLoyaltyRedeem()" style="width:18px;height:18px;accent-color:#c0392b;cursor:pointer;">
+              <label for="redeemPoints" style="margin:0;cursor:pointer;font-size:0.9rem;font-weight:600;">✅ Use my <span id="loyaltyPtsCount">0</span> points for ₹<span id="redeemAmt2">0</span> off</label>
+            </div>
+            <p style="font-size:0.78rem;color:#999;margin-top:6px;margin-bottom:0;">10 points = ₹1 off. Points are earned from every order (₹10 spent = 1 point).</p>
+          </div>
+        </div>
+
+        <!-- Scheduled Delivery -->
+        <div class="co-card mt-3">
+          <div class="co-card-header">
+            <div class="co-card-icon" style="background:linear-gradient(135deg,#8e44ad,#9b59b6);"><i class="bi bi-calendar-event-fill"></i></div>
+            <div>
+              <h4>Delivery Time</h4>
+              <p>Deliver now or schedule for later</p>
+            </div>
+          </div>
+          <div class="co-card-body">
+            <div class="delivery-time-opts">
+              <label class="delivery-time-opt active" id="opt-now">
+                <input type="radio" name="deliveryTime" value="now" checked onchange="toggleSchedule(this)">
+                <i class="bi bi-lightning-charge-fill" style="color:#f39c12;"></i>
+                <div>
+                  <strong>Deliver Now</strong>
+                  <span>~30–45 mins</span>
+                </div>
+              </label>
+              <label class="delivery-time-opt" id="opt-later">
+                <input type="radio" name="deliveryTime" value="later" onchange="toggleSchedule(this)">
+                <i class="bi bi-clock-fill" style="color:#8e44ad;"></i>
+                <div>
+                  <strong>Schedule</strong>
+                  <span>Pick a time</span>
+                </div>
+              </label>
+            </div>
+            <div id="scheduleInputWrap" style="display:none;margin-top:14px;">
+              <label class="co-label">Select Delivery Date & Time</label>
+              <input type="datetime-local" class="co-input" id="scheduleDateTime" style="max-width:280px;">
+              <p style="font-size:0.76rem;color:#aaa;margin-top:6px;margin-bottom:0;">Min 1 hour from now. Max 7 days ahead.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Coupon -->
+        <div class="co-card mt-3">
+          <div class="co-card-header">
+            <div class="co-card-icon"><i class="bi bi-tag-fill"></i></div>
+            <div>
+              <h4>Coupon Code</h4>
+              <p>Have a promo code? Apply it here.</p>
+            </div>
+          </div>
+          <div class="co-card-body">
+            <div class="coupon-row">
+              <input type="text" class="co-input" id="couponInput" placeholder="Enter coupon code (e.g. FOODIES25)">
+              <button class="co-coupon-btn" onclick="applyCoupon()">Apply</button>
+            </div>
+            <div id="couponMsg" style="display:none;"></div>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="co-card mt-3" id="paymentSection">
+          <div class="co-card-header">
+            <div class="co-card-icon"><i class="bi bi-credit-card-2-front-fill"></i></div>
+            <div>
+              <h4>Payment Method</h4>
+              <p>Choose how you want to pay</p>
+            </div>
+          </div>
+          <div class="co-card-body">
+            <div class="payment-options">
+              <label class="payment-option active" id="opt-razorpay">
+                <input type="radio" name="payment" value="razorpay" checked>
+                <div class="payment-icon"><i class="bi bi-shield-lock-fill"></i></div>
+                <div>
+                  <strong>Pay Online</strong>
+                  <span>UPI, Card, NetBanking, Wallets via Razorpay</span>
+                </div>
+                <div class="payment-badge">Recommended</div>
+              </label>
+              <label class="payment-option" id="opt-cod">
+                <input type="radio" name="payment" value="cod">
+                <div class="payment-icon"><i class="bi bi-cash-coin"></i></div>
+                <div>
+                  <strong>Cash on Delivery</strong>
+                  <span>Pay when your order arrives at your door</span>
+                </div>
+              </label>
+            </div>
+            <div class="razorpay-note">
+              <i class="bi bi-lock-fill"></i> 256-bit SSL encrypted. Your payment info is never stored.
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT: Order Summary -->
+      <div class="col-lg-5">
+        <div class="co-summary sticky-top" style="top:20px;">
+          <h4 class="co-summary-title">Order Summary</h4>
+
+          <div class="co-items" id="coItems">
+            <!-- Populated by JS -->
+          </div>
+
+          <div class="co-totals">
+            <div class="co-total-row">
+              <span>Subtotal</span>
+              <span id="coSubtotal">₹0.00</span>
+            </div>
+            <div class="co-total-row">
+              <span>Delivery</span>
+              <span id="coDelivery">₹40.00</span>
+            </div>
+            <div class="co-total-row discount-row" id="discountRow" style="display:none;">
+              <span>Coupon Discount</span>
+              <span id="coDiscount" class="text-success">-₹0.00</span>
+            </div>
+            <div class="co-total-row discount-row" id="loyaltyDiscountRow" style="display:none;">
+              <span>🏆 Points Redeemed</span>
+              <span id="coLoyaltyDiscount" class="text-success">-₹0.00</span>
+            </div>
+            <div class="co-total-row total-row">
+              <span>Total</span>
+              <strong id="coTotal">₹0.00</strong>
+            </div>
+          </div>
+
+          <div id="checkoutAlert" class="co-alert" style="display:none;"></div>
+
+          <button class="co-place-btn" id="placeOrderBtn" onclick="placeOrder()">
+            <i class="bi bi-lock-fill"></i>
+            <span id="placeOrderText">Place Order</span>
+            <div class="btn-loader" id="orderLoader" style="display:none;"></div>
+          </button>
+
+          <div class="co-secure-note">
+            <i class="bi bi-shield-check"></i> Safe, secure & encrypted checkout
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

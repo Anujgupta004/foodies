@@ -1,0 +1,105 @@
+/* ===== CHECKOUT — Fully Responsive ===== */
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+:root{--primary:#c0392b;--primary-dark:#922b21;--dark:#0d0d0d;--white:#fff;--off-white:#f8f5f0;--border:#e8e0d8;--text:#333;--text-light:#666;--text-muted:#999;--radius:14px;--font-head:'Playfair Display',serif;--font-body:'Inter',sans-serif;--transition:all .3s ease}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{font-size:16px}
+body{font-family:var(--font-body);background:var(--off-white);color:var(--text)}
+
+/* NAV */
+.co-nav{background:var(--white);box-shadow:0 2px 14px rgba(0,0,0,.06);position:sticky;top:0;z-index:100}
+.co-logo{font-family:var(--font-head);font-size:1.4rem;font-weight:800;color:var(--dark);text-decoration:none}
+.co-logo span{color:var(--primary)}
+.co-back-link{color:var(--text-light);text-decoration:none;font-size:.85rem;display:flex;align-items:center;gap:5px;transition:var(--transition)}
+.co-back-link:hover{color:var(--primary)}
+
+/* STEPS */
+.co-steps{display:flex;align-items:center;gap:6px}
+.co-step{display:flex;align-items:center;gap:7px;font-size:.82rem;font-weight:500;color:var(--text-muted)}
+.co-step span{width:26px;height:26px;border-radius:50%;background:var(--border);color:var(--text-muted);display:flex;align-items:center;justify-content:center;font-size:.76rem;font-weight:700}
+.co-step.active{color:var(--primary)}
+.co-step.active span{background:var(--primary);color:white}
+.co-step-line{width:24px;height:2px;background:var(--border)}
+
+/* CONTAINER */
+.co-container{padding:28px 0 56px}
+
+/* CARDS */
+.co-card{background:var(--white);border-radius:var(--radius);box-shadow:0 3px 16px rgba(0,0,0,.06);overflow:hidden;margin-bottom:16px}
+.co-card-header{display:flex;align-items:center;gap:13px;padding:18px 22px;border-bottom:1px solid var(--border)}
+.co-card-icon{width:42px;height:42px;border-radius:11px;background:rgba(192,57,43,.09);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.15rem;flex-shrink:0}
+.co-card-header h4{font-family:var(--font-head);font-size:1.1rem;font-weight:700;color:var(--dark);margin:0}
+.co-card-header p{font-size:.8rem;color:var(--text-muted);margin:0}
+.co-card-body{padding:22px}
+
+/* INPUTS */
+.co-label{display:block;font-size:.83rem;font-weight:600;color:var(--dark);margin-bottom:5px}
+.co-input{width:100%;padding:11px 14px;border:2px solid var(--border);border-radius:11px;background:var(--off-white);font-size:.9rem;color:var(--dark);outline:none;transition:var(--transition);font-family:var(--font-body)}
+.co-input:focus{border-color:var(--primary);background:var(--white);box-shadow:0 0 0 3px rgba(192,57,43,.07)}
+.co-err{display:block;color:#e74c3c;font-size:.75rem;margin-top:3px}
+
+/* COUPON */
+.coupon-row{display:flex;gap:9px}
+.co-coupon-btn{padding:11px 22px;background:var(--primary);color:white;border:none;border-radius:11px;font-weight:700;cursor:pointer;white-space:nowrap;transition:var(--transition);font-family:var(--font-body);font-size:.88rem;flex-shrink:0}
+.co-coupon-btn:hover{background:var(--primary-dark)}
+#couponMsg{padding:9px 13px;border-radius:9px;font-size:.82rem;margin-top:9px;font-weight:500}
+#couponMsg.success{background:#d4edda;color:#155724}
+#couponMsg.error{background:#f8d7da;color:#721c24}
+
+/* PAYMENT */
+.payment-options{display:flex;flex-direction:column;gap:10px;margin-bottom:14px}
+.payment-option{display:flex;align-items:center;gap:14px;padding:14px 18px;border:2px solid var(--border);border-radius:var(--radius);cursor:pointer;transition:var(--transition);position:relative}
+.payment-option input[type="radio"]{width:17px;height:17px;accent-color:var(--primary);flex-shrink:0}
+.payment-option.active,.payment-option:has(input:checked){border-color:var(--primary);background:rgba(192,57,43,.03)}
+.payment-icon{width:38px;height:38px;border-radius:9px;background:rgba(192,57,43,.09);color:var(--primary);display:flex;align-items:center;justify-content:center;font-size:1.05rem;flex-shrink:0}
+.payment-option strong{display:block;font-size:.9rem;color:var(--dark)}
+.payment-option span{font-size:.76rem;color:var(--text-muted)}
+.payment-badge{position:absolute;right:14px;top:50%;transform:translateY(-50%);background:#16a085;color:white;font-size:.67rem;font-weight:700;padding:3px 9px;border-radius:50px}
+.razorpay-note{font-size:.77rem;color:var(--text-muted);display:flex;align-items:center;gap:5px;background:var(--off-white);padding:9px 12px;border-radius:9px}
+.razorpay-note i{color:#16a085}
+
+/* SUMMARY */
+.co-summary{background:var(--white);border-radius:var(--radius);padding:24px;box-shadow:0 3px 16px rgba(0,0,0,.06)}
+.co-summary-title{font-family:var(--font-head);font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.co-items{margin-bottom:18px}
+.co-item-row{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)}
+.co-item-row:last-child{border:none}
+.co-item-name{flex:1;font-size:.87rem;font-weight:600;color:var(--dark)}
+.co-item-qty{font-size:.77rem;color:var(--text-muted)}
+.co-item-price{font-size:.92rem;font-weight:700;color:var(--primary)}
+.co-totals{border-top:1px solid var(--border);padding-top:14px;margin-bottom:18px}
+.co-total-row{display:flex;justify-content:space-between;padding:6px 0;font-size:.88rem;color:var(--text-light)}
+.total-row{font-size:1.05rem;font-weight:700;color:var(--dark);border-top:2px solid var(--border);padding-top:11px;margin-top:5px}
+.total-row strong{font-size:1.25rem;color:var(--primary)}
+.discount-row span:last-child{color:#16a085;font-weight:700}
+.co-alert{padding:11px 14px;border-radius:11px;font-size:.85rem;font-weight:500;margin-bottom:12px}
+.co-alert.success{background:#d4edda;color:#155724;border:1px solid #c3e6cb}
+.co-alert.error{background:#f8d7da;color:#721c24;border:1px solid #f5c6cb}
+.co-place-btn{width:100%;padding:15px;background:var(--primary);color:white;border:none;border-radius:var(--radius);font-size:1rem;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:9px;transition:var(--transition);font-family:var(--font-body)}
+.co-place-btn:hover{background:var(--primary-dark);transform:translateY(-2px);box-shadow:0 7px 22px rgba(192,57,43,.34)}
+.btn-loader{width:19px;height:19px;border:3px solid rgba(255,255,255,.28);border-top-color:white;border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.co-secure-note{text-align:center;font-size:.77rem;color:var(--text-muted);margin-top:12px;display:flex;align-items:center;justify-content:center;gap:5px}
+.co-secure-note i{color:#16a085}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:767px){
+  .co-container{padding:14px 0 40px}
+  .co-summary.sticky-top{position:relative!important;top:auto!important}
+}
+@media(max-width:575px){
+  .co-steps{display:none}
+  .co-back-link{font-size:.78rem}
+  .co-logo{font-size:1.15rem}
+  .co-card-body{padding:14px}
+  .co-card-header{padding:14px 16px}
+  .co-card-header h4{font-size:.95rem}
+  .coupon-row{flex-direction:column}
+  .coupon-row .co-input,.co-coupon-btn{width:100%}
+  .payment-option{padding:11px 12px;gap:10px}
+  .payment-badge{display:none}
+  .co-summary{padding:16px 14px}
+  .co-place-btn{padding:13px;font-size:.95rem}
+}
+@media(min-width:992px){
+  .co-summary.sticky-top{top:20px}
+}

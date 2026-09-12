@@ -1,0 +1,216 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Order Placed! — FOODIES.COM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/darkmode.css" />
+  <link rel="stylesheet" href="css/modern.css" />
+  <script>(function(){const t=localStorage.getItem('foodies_theme');if(t==='dark'||(t==null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')})();</script>
+  <style>
+    :root { --primary: #c0392b; --green: #16a085; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f8f5f0;
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 24px;
+    }
+    html.dark body { background: #0f0f0f; }
+    html.dark .card { background: #1a1a1a; box-shadow: 0 8px 40px rgba(0,0,0,0.4); }
+    html.dark h1 { color: #f0f0f0; }
+    html.dark .logo { color: #f0f0f0; }
+    html.dark .subtitle { color: #aaa; }
+    html.dark .order-info { background: #222; }
+    html.dark .order-info-row { border-color: #333; }
+    html.dark .order-info-row span:first-child { color: #888; }
+    html.dark .order-info-row strong { color: #f0f0f0; }
+    html.dark .t-dot.pending { background: #2a2a2a; color: #666; }
+    html.dark .t-line { background: #2a2a2a; }
+    html.dark .t-label { color: #666; }
+    html.dark .btn-ghost { color: #c0392b; border-color: #c0392b; }
+    html.dark .btn-ghost:hover { background: #c0392b; color: white; }
+    .card {
+      background: white; border-radius: 24px;
+      padding: clamp(28px, 6vw, 56px) clamp(24px, 5vw, 48px);
+      max-width: 520px; width: 100%;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.1);
+    }
+    .success-icon {
+      width: 80px; height: 80px;
+      background: var(--green); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+      animation: scaleIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes scaleIn { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .success-icon i { font-size: 2.2rem; color: white; }
+    h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.7rem, 5vw, 2.3rem);
+      font-weight: 800; color: #0d0d0d; margin-bottom: 10px;
+    }
+    .subtitle { color: #666; font-size: 1rem; line-height: 1.7; margin-bottom: 28px; }
+    .order-info {
+      background: #f8f5f0; border-radius: 14px;
+      padding: 20px 24px; margin-bottom: 28px; text-align: left;
+    }
+    .order-info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 8px 0; border-bottom: 1px solid #e8e0d8; font-size: 0.9rem;
+    }
+    .order-info-row:last-child { border: none; }
+    .order-info-row span:first-child { color: #666; }
+    .order-info-row strong { color: #0d0d0d; font-weight: 700; }
+    .tracker {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0; margin-bottom: 32px; overflow-x: auto; padding: 8px 0;
+    }
+    .t-step { display: flex; flex-direction: column; align-items: center; gap: 7px; min-width: 60px; }
+    .t-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.82rem;
+    }
+    .t-dot.done { background: var(--green); color: white; }
+    .t-dot.pending { background: #e8e0d8; color: #999; }
+    .t-label { font-size: 0.67rem; color: #666; text-align: center; }
+    .t-line { height: 3px; flex: 1; background: #e8e0d8; margin-bottom: 18px; min-width: 20px; }
+    .t-line.done { background: var(--green); }
+    .btn-primary-custom {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: var(--primary); color: white;
+      padding: 13px 28px; border-radius: 50px;
+      font-weight: 700; font-size: 0.92rem; text-decoration: none;
+      transition: all 0.3s ease; margin: 6px;
+    }
+    .btn-primary-custom:hover { background: #922b21; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(192,57,43,0.35); color: white; }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 9px;
+      background: transparent; color: var(--primary);
+      padding: 13px 28px; border-radius: 50px;
+      font-weight: 700; font-size: 0.92rem; text-decoration: none;
+      border: 2px solid var(--primary); transition: all 0.3s ease; margin: 6px;
+    }
+    .btn-ghost:hover { background: var(--primary); color: white; }
+    .logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem; font-weight: 800;
+      color: #0d0d0d; text-decoration: none;
+      display: block; margin-bottom: 32px;
+    }
+    .logo span { color: var(--primary); }
+    .eta-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(22,160,133,0.1); color: var(--green);
+      border: 1px solid rgba(22,160,133,0.25);
+      padding: 8px 20px; border-radius: 50px;
+      font-size: 0.85rem; font-weight: 700; margin-bottom: 24px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <a href="index.html" class="logo">FOODIES<span>.</span>COM</a>
+
+    <div class="success-icon"><i class="bi bi-check-lg"></i></div>
+
+    <h1>Order Placed! 🎉</h1>
+    <p class="subtitle">Thank you for your order. We've received it and our chefs are getting ready!</p>
+
+    <div class="eta-badge">
+      <i class="bi bi-clock"></i>
+      <span>Estimated delivery: <strong id="etaText">30–45 minutes</strong></span>
+    </div>
+
+    <div class="order-info" id="orderInfo">
+      <div class="order-info-row">
+        <span>Order ID</span>
+        <strong id="displayOrderId">—</strong>
+      </div>
+      <div class="order-info-row">
+        <span>Status</span>
+        <strong style="color:#856404;">🟡 Confirmed</strong>
+      </div>
+      <div class="order-info-row">
+        <span>Payment</span>
+        <strong id="displayPayment">—</strong>
+      </div>
+    </div>
+
+    <!-- Mini Order Tracker -->
+    <div class="tracker">
+      <div class="t-step">
+        <div class="t-dot done"><i class="bi bi-check"></i></div>
+        <div class="t-label">Placed</div>
+      </div>
+      <div class="t-line done"></div>
+      <div class="t-step">
+        <div class="t-dot done"><i class="bi bi-check"></i></div>
+        <div class="t-label">Confirmed</div>
+      </div>
+      <div class="t-line"></div>
+      <div class="t-step">
+        <div class="t-dot pending">👨‍🍳</div>
+        <div class="t-label">Preparing</div>
+      </div>
+      <div class="t-line"></div>
+      <div class="t-step">
+        <div class="t-dot pending">🚴</div>
+        <div class="t-label">On Way</div>
+      </div>
+      <div class="t-line"></div>
+      <div class="t-step">
+        <div class="t-dot pending">🎉</div>
+        <div class="t-label">Delivered</div>
+      </div>
+    </div>
+
+    <div>
+      <a href="orders.html" class="btn-primary-custom">
+        <i class="bi bi-bag-check"></i> Track My Order
+      </a>
+      <a href="index.html" class="btn-ghost">
+        <i class="bi bi-house"></i> Back to Home
+      </a>
+    </div>
+  </div>
+
+  <script src="js/darkmode.js"></script>
+  <script>
+    // Read order info from URL params
+    const params = new URLSearchParams(window.location.search);
+    const orderId = params.get('id');
+    const payment = params.get('payment') || 'paid';
+    const earnedPts = parseInt(params.get('pts') || '0');
+
+    if (orderId) {
+      document.getElementById('displayOrderId').textContent = '#' + orderId.slice(-8).toUpperCase();
+    }
+    document.getElementById('displayPayment').textContent =
+      payment === 'cod' ? '💵 Cash on Delivery' : '✅ Paid Online';
+
+    // Show loyalty points earned banner
+    if (earnedPts > 0) {
+      const ptsBanner = document.createElement('div');
+      ptsBanner.style.cssText = 'background:linear-gradient(135deg,#f39c12,#e67e22);color:white;border-radius:14px;padding:14px 20px;margin-top:16px;display:flex;align-items:center;gap:10px;font-weight:700;font-size:0.9rem;justify-content:center;';
+      ptsBanner.innerHTML = `🏆 You earned <span style="font-size:1.2rem;margin:0 4px;">+${earnedPts}</span> Loyalty Points!`;
+      document.querySelector('.card').insertBefore(ptsBanner, document.querySelector('.card > div:last-child'));
+    }
+
+    // Countdown timer
+    let mins = 35;
+    const etaEl = document.getElementById('etaText');
+    const timer = setInterval(() => {
+      if (mins <= 0) { clearInterval(timer); etaEl.textContent = 'Arriving now!'; return; }
+      etaEl.textContent = `~${mins} minutes`;
+      mins--;
+    }, 60000);
+  </script>
+</body>
+</html>

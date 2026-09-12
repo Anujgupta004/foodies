@@ -1,698 +1,838 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>FOODIES.COM</title>
-  <link rel="stylesheet" href="css/bootstrap.Css" />
-  <link rel="stylesheet" href="css/style.css" />
+  <title>FOODIES.COM — Taste The World</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
   <!-- Bootstrap Icons -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css"
-    integrity="sha512-DxV+EoADOkOygM4IR9yXP8Sb2qwgidEmeqAEmDKIOfPRQZOWbXCzLC6vjbZyy0vPisbH2SyW27+ddLVCN+OMzQ=="
-    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- AOS CSS -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/darkmode.css" />
+  <link rel="stylesheet" href="css/modern.css" />
+  <!-- Apply dark mode before render to prevent flash -->
+  <script>
+    (function(){const t=localStorage.getItem('foodies_theme');if(t==='dark'||(t==null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')})();
+  </script>
 </head>
 
 <body>
-  <!-- start -->
-  <div class="container-fluid mx-0">
-    <!-- nav start -->
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary fixed-top">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#"><img src="img/logo/logo.png" height="50" width="140" /></a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse cx" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active aa" aria-current="page" href="#about">About Us</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active aa" aria-current="page" href="#Explore">Explore Foods</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active aa" aria-current="page" href="#Review">
-                Reviews</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active aa" aria-current="page" href="#FAQ">FAQ</a>
-            </li>
-            <form class="d-flex text-r" role="search" style="color: white;">
-              <button class="btn text-light" type="submit" style="background-color: #a82c48; border: none;">
-                1800 180 2223    
-              </button>
-            </form>
-          </ul>
-        </div>
+  <!-- ========== FLASH SALE BANNER ========== -->
+  <div class="flash-sale-banner" id="flashSaleBanner" style="display:none;">
+    <div class="flash-sale-inner">
+      <span class="flash-icon">⚡</span>
+      <span class="flash-text">FLASH SALE — Extra <strong>15% OFF</strong> on all orders above ₹299!</span>
+      <div class="flash-timer-wrap">
+        <span class="flash-timer-label">Ends in</span>
+        <span class="flash-timer" id="flashTimer">00:00:00</span>
       </div>
-    </nav>
-    <!-- nav end  -->
-    <!-- order start -->
-    <div class="row slidebar">
-      <div class="col-sm-12 mt-3">
-        <div class="row mt-5 ">
-          <div class="col-sm-5 text-center mt-5">
-            <div class="slide">
-              <img src="img/Food menu - Made with PosterMyWall .jpg" alt="">
-            </div>
-            <h1 class="fw-bold">
-              Good Food choices are <br />
-              good investments
-            </h1>
-            <br />
-            <br />
-            <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-              labore <br />rerum ut corrupti autem quisquam. Neque accusamus
-              dolores odit fugit dolorum,
-            </p>
-            <div class="mt-5">
-              <button class="btn glitch order" style="background-color: #a82c48; color: white">
-                Order Now
-                <i class="fa-thin fa-cart-shopping fa-xs" style="color: white"></i>
-              </button>
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-
-              <button class="btn glitch gt order">
-                <a href="#" style="text-decoration: none; color: black">
-                  <span> Order Now </span></a>
-              </button>
-            </div>
-          </div>
-          <div class="col-sm-7">
-            <img src="img/img/snacks.png" class="img-fluid" alt="" />
-          </div>
-        </div>
-      </div>
+      <a href="#menu" class="flash-cta">Grab Now</a>
     </div>
-    <!-- order end -->
-    <!-- data start -->
-    <div class="row mt-3">
-      <div class="col-sm-12" style="background-color: #a82c48">
-        <div class="row mx-auto py-2 mt-3" style="display: flex; justify-content: space-around">
-          <div class="col-sm-2 data">
-            1232+
-            <br />
-            <p>Saving</p>
-          </div>
-          <div class="col-sm-2 data">
-            6792+
-            <br />
-            <p>Saving</p>
-          </div>
-          <div class="col-sm-2 data">
-            5463+
-            <br />
-            <p>Saving</p>
-          </div>
-          <div class="col-sm-2 data">
-            4627+ <br />
-            <p>Saving</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- data end -->
-    <!-- about start -->
-    <section id="about">
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="row">
-            <div class="col-sm-11">
-              <div class="row mt-5 mx-auto">
-                <div class="col-sm-5">
-                  <img src="img/img/eat.jpg" alt="" class="img-fluid" height="100px" style="border-radius: 10px;">
-                </div>
-                <div class="col-sm-7 mt-5 ">
-                  <h1 class="fw-bold">
-                    We Pride Ourselves On <br> Making Real Food From The Best Ingredients.
-                  </h1>
-                  <p class="mt-5">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur, distinctio
-                    reiciendis ab corporis officia deleniti illum possimus praesentium quas necessitatibus.</p>
-                  <button class="btn glitch mt-3" style="background-color: #a82c48; color: white">
-                    Learn More
-                    <i class="fa-thin fa-cart-shopping fa-xs" style="color: white"></i>
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- about end -->
-    <!-- type start -->
-
-    <div class="row">
-      <div class="col-sm-12">
-        <div class="row">
-          <div class="col-sm-11 mx-auto mt-5">
-            <div class="row ">
-              <div class="col-sm-6 mt-5">
-                <h1 class="fw-bold mt-5">
-                  We Make Everything By <br>hand With The Possible Ingredients.
-                </h1>
-                <p class="mt-3">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reprehenderit hic sequi ratione
-                  ut deleniti doloribus ad fugiat rem vel magni earum odit voluptates praesentium numquam perferendis
-                  cum neque expedita, iusto obcaecati soluta! Sed magni excepturi, earum quae ut consequuntur veniam.
-                </p>
-                <div class="mt-3">
-                  <p>
-                    <i class="fa-solid fa-circle-check fa-lg" style="color: #a82c48;"></i> Lorem ipsum dolor sit amet
-                    consectetur.
-                  </p>
-                  <p>
-                    <i class="fa-solid fa-circle-check fa-lg" style="color: #a82c48;"></i>Lorem ipsum dolor sit amet
-                    consectetur.
-                  </p>
-                  <p>
-                    <i class="fa-solid fa-circle-check fa-lg" style="color: #a82c48;"></i>Lorem ipsum dolor sit amet
-                    consectetur.
-                  </p>
-                </div>
-                <button class="btn glitch mt-3" style="background-color: #a82c48; color: white">
-                  Learn More
-                  <i class="fa-thin fa-cart-shopping fa-xs" style="color: white"></i>
-                </button>
-
-
-              </div>
-              <div class="col-sm-6">
-                <img src="img/img/type.png" alt="" class="img-fluid" style="border-radius: 10px;">
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- type end -->
-    <!-- stomach start -->
-    <div class="row">
-      <div class="col-sm-12 stomach  mt-5">
-
-        <div class="row">
-          <div class="col-sm-12 text-center mt-5  ">
-            <h1 style="color: #a82c48; " class="mt-5 fw-bold">
-              When A Man's Stomach is Full It Makes No <br>
-              Difference Whether He is Rich Or Poor
-            </h1>
-            <p>
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eius neque aperiam ea quaerat eveniet facere
-              inventore explicabo rerum quod alias?
-              <br>
-              eveniet facere inventore explicabo rerum quod alias?
-            </p>
-            <button class="btn glitch mt-3" style="background-color: #a82c48; color: white">
-              Read More
-              <i class="fa-thin fa-cart-shopping fa-xs" style="color: white"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- stomach end -->
-    <!-- Explore start-->
-   <section
-    id="Explore">
-   <div class="row">
-      <div class="col-sm-12 mt-5 text-center">
-        <h1 class="fw-bold">
-          Explore Our foods
-        </h1>
-        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsa fugiat repellendus veniam eaque <br> blanditiis
-          enim velit assumenda alias sit, fugit b quasi aut voluptas helo ke jdh ncjn <br>saepe labore repellat earum a
-          expedita? abore repellat earum a expedita?</p>
-      </div>
-    </div></section>
-
-    <!-- Explore end-->
-    <!-- order Start -->
-    <div class="row">
-      <div class="col-sm-12 mt-3">
-        <div class="row">
-          <div class="col-sm-11 mx-auto " style="display: flex; justify-content: space-evenly;">
-            <div class="row">
-              <div class="card" style="width: 26rem; border: none;">
-                <img src="img/img/type1.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold">Momos</h5>
-                  <p class="card-text"> <span>
-                      Time : 15-20 Minutes | Serves ; 1
-                    </span>
-
-
-                  </p>
-                  <p>
-                    <span>
-                      <h5>
-                        <span>$10.50 <del class="del"> $12.50</del></span>
-                      </h5>
-                    </span>
-                  </p>
-                  <a href="#" class="btn" style="background-color: #a82c48; color: white;">Order Now</a>
-                </div>
-              </div>
-
-
-
-              <div class="card" style="width: 26rem; border: none;">
-                <img src="img/img/type2.jpg" class="card-img-top" alt="...">
-                <div class="card-body mt-3">
-                  <h5 class="card-title fw-bold">Burger</h5>
-                  <p class="card-text"> <span>
-                      Time : 15-20 Minutes | Serves ; 1
-                    </span>
-
-
-                  </p>
-                  <p>
-                    <span>
-                      <h5>
-                        <span>$10.50 <del class="del"> $12.50</del></span>
-                      </h5>
-                    </span>
-                  </p>
-                  <a href="#" class="btn " style="background-color: #a82c48; color: white;">Order Now</a>
-                </div>
-              </div>
-
-
-
-              <div class="card " style="width: 26rem; border: none;">
-                <img src="img/img/type3.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                  <h5 class="card-title fw-bold">Pizza</h5>
-                  <p class="card-text">
-                    <span>
-                      Time : 15-20 Minutes | Serves ; 1
-                    </span>
-
-
-                  </p>
-                  <p>
-                    <span>
-                      <h5>
-                        <span>$10.50 <del class="del"> $12.50</del></span>
-                      </h5>
-                    </span>
-                  </p>
-                  <a href="#" class="btn " style="background-color: #a82c48; color: white;">Order Now</a>
-                </div>
-              </div>
-
-
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- order end -->
-    <!-- testimonials start -->
-
-
-  <section id="Review">
-      <div class="container ">
-  <h1 class="text-center mt-5  fw-bold">What Our Clients Say</h1>
-
-  <!-- Carousel with fade effect -->
-  <div id="testimonialCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel" data-bs-interval="3000">
-    <div class="carousel-inner">
-
-      <!-- Testimonial 1 -->
-      <div class="carousel-item active">
-        <div class="row align-items-center testimonial">
-          <div class="col-sm-4 text-center">
-            <img src="img/review/e1.jpg" alt="Client 1">
-          </div>
-          <div class="col-sm-8">
-            <p class="testimonial-text">"Tasty food brings happiness with every bite."</p>
-            <h5 class="testimonial-name">– John Doe</h5>
-            <div class="stars">
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-half"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Testimonial 2 -->
-      <div class="carousel-item">
-        <div class="row align-items-center testimonial">
-          <div class="col-sm-4 text-center">
-            <img src="img/review/e2.jpg" alt="Client 2">
-          </div>
-          <div class="col-sm-8">
-            <p class="testimonial-text">"Good food makes a bad day better."</p>
-            <h5 class="testimonial-name">– Sarah Smith</h5>
-            <div class="stars">
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Testimonial 3 -->
-      <div class="carousel-item">
-        <div class="row align-items-center testimonial">
-          <div class="col-sm-4 text-center">
-            <img src="img/review/e3.jpg" alt="Client 3">
-          </div>
-          <div class="col-sm-8">
-            <p class="testimonial-text">"Every flavor tells its own story."</p>
-            <h5 class="testimonial-name">– Michael Lee</h5>
-            <div class="stars">
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star"></i>
-              <i class="bi bi-star"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-<!-- testinomial 04 -->
-
- <!-- <div class="carousel-item">
-        <div class="row align-items-center testimonial">
-          <div class="col-sm-4 text-center">
-            <img src="img/review/e3.jpg" alt="Client 3">
-          </div>
-          <div class="col-sm-8">
-            <p class="testimonial-text">"Every flavor tells its own story."</p>
-            <h5 class="testimonial-name">– Michael Leud</h5>
-            <div class="stars">
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star-fill"></i>
-              <i class="bi bi-star"></i>
-              <i class="bi bi-star"></i>
-            </div>
-          </div>
-        </div>
-      </div>  -->
-
-    </div>
- <!-- testinomial end -->
-    <!-- Controls -->
-    <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-      <span class="carousel-control-prev-icon"></span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-      <span class="carousel-control-next-icon"></span>
-    </button>
   </div>
+
+  <!-- ========== PRELOADER ========== -->
+  <div id="preloader">
+    <div class="preloader-inner">
+      <div class="loader-ring"></div>
+      <p>FOODIES</p>
+    </div>
+  </div>
+
+  <!-- ========== NAVBAR ========== -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <span class="brand-text">FOODIES<span class="brand-dot">.</span>COM</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="toggler-icon"><span></span><span></span><span></span></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav mx-auto">
+          <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#menu">Menu</a></li>
+          <li class="nav-item"><a class="nav-link" href="#reviews">Reviews</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="nav-actions d-flex align-items-center gap-3">
+          <button class="dark-toggle" data-dark-toggle title="Toggle Dark Mode">
+            <i class="bi bi-moon-fill"></i>
+          </button>
+          <a href="#" class="nav-cart"><i class="bi bi-bag"></i><span class="cart-count">0</span></a>
+          <a href="#menu" class="btn-order">Order Now</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ========== HERO SECTION ========== -->
+  <section id="home" class="hero-section">
+    <div class="hero-bg">
+      <div class="hero-overlay"></div>
+    </div>
+    <div class="container hero-container">
+      <div class="row align-items-center min-vh-100">
+        <div class="col-lg-6 hero-content" data-aos="fade-right">
+          <span class="hero-tag">🍽️ Premium Food Experience</span>
+          <h1 class="hero-title">
+            Good Food <br>
+            <span class="text-accent">Brings</span> Good <br>
+            <span class="hero-title-outline">Memories.</span>
+          </h1>
+          <p class="hero-desc">
+            Discover handcrafted dishes made from the freshest ingredients, delivered hot to your door in minutes.
+          </p>
+          <div class="hero-btns">
+            <a href="#menu" class="btn-primary-custom">
+              <span>Explore Menu</span>
+              <i class="bi bi-arrow-right"></i>
+            </a>
+            <a href="#about" class="btn-ghost-custom">
+              <i class="bi bi-play-circle-fill"></i>
+              <span>Our Story</span>
+            </a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat-item">
+              <h3>12K+</h3>
+              <p>Happy Customers</p>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <h3>250+</h3>
+              <p>Menu Items</p>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+              <h3>4.9★</h3>
+              <p>Avg. Rating</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 hero-image-col" data-aos="fade-left">
+          <div class="hero-img-wrapper">
+            <div class="hero-img-circle">
+              <img src="img/img/snacks.png" alt="Food" class="hero-food-img">
+            </div>
+            <div class="floating-card card-1">
+              <i class="bi bi-clock"></i>
+              <div>
+                <strong>Fast Delivery</strong>
+                <span>20 min avg</span>
+              </div>
+            </div>
+            <div class="floating-card card-2">
+              <i class="bi bi-star-fill"></i>
+              <div>
+                <strong>Top Rated</strong>
+                <span>4.9 / 5.0</span>
+              </div>
+            </div>
+            <div class="floating-badge">🔥 Today's Special</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-indicator">
+      <span></span>
+    </div>
   </section>
 
+  <!-- ========== MARQUEE BAR ========== -->
+  <div class="marquee-bar">
+    <div class="marquee-track">
+      <span>🍕 Pizza</span><span>🍔 Burgers</span><span>🥟 Momos</span>
+      <span>🍜 Noodles</span><span>🌮 Tacos</span><span>🍣 Sushi</span>
+      <span>🥗 Salads</span><span>🧁 Desserts</span><span>🥤 Drinks</span>
+      <span>🍕 Pizza</span><span>🍔 Burgers</span><span>🥟 Momos</span>
+      <span>🍜 Noodles</span><span>🌮 Tacos</span><span>🍣 Sushi</span>
+      <span>🥗 Salads</span><span>🧁 Desserts</span><span>🥤 Drinks</span>
+    </div>
+  </div>
 
-
-    <!-- testimonials end -->
-    <!-- question start -->
-
-   <section id="FAQ"> 
-     <div class="row">
-      <div class="col-sm-12">
-        <div class="row  py-5">
-          <h1 class="text-center fw-bold">Frequently Asked Questions </h1>
-        </div>
-        <div class="row">
-          <div class="col-sm-11 mx-auto">
-            <div class="row ">
-              <div class="col-sm-6">
-                <b>
-                  @ Is foodies bread Really Baked fresh each Day
-                </b>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate tempore in fugiat officia
-                  voluptatem perspiciatis? Cumque odio ratione earum? Tenetur?Lorem ipsum dolor sit amet.
-                </p>
-              </div>
-
-
-              <div class="col-sm-6">
-                <b>
-                  # Is foodies bread Really Baked fresh each Day
-                </b>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate tempore in fugiat officia
-                  voluptatem perspiciatis? Cumque odio ratione earum? Tenetur?
-                  Lorem ipsum dolor sit amet.
-                </p>
-              </div>
-
-
-
+  <!-- ========== ABOUT SECTION ========== -->
+  <section id="about" class="about-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="about-img-grid">
+            <img src="img/img/eat.jpg" alt="Food" class="about-img-main">
+            <img src="img/img/type.png" alt="Food" class="about-img-secondary">
+            <div class="about-experience-badge">
+              <h2>10+</h2>
+              <p>Years of<br>Excellence</p>
             </div>
           </div>
         </div>
-
-        <div class="row mt-3 ">
-          <div class="col-sm-11 mx-auto">
-            <div class="row">
-              <div class="col-sm-6 ">
-                <b>
-                  $ Is foodies bread Really Baked fresh each Day
-                </b>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate tempore in fugiat officia
-                  voluptatem perspiciatis? Cumque odio ratione earum? Tenetur? Lorem ipsum dolor sit amet.
-                </p>
-
+        <div class="col-lg-7" data-aos="fade-left">
+          <div class="section-tag">About Us</div>
+          <h2 class="section-title">
+            We Pride Ourselves On <br>
+            <span class="text-accent">Making Real Food</span> From<br>
+            The Best Ingredients.
+          </h2>
+          <p class="section-desc">
+            At Foodies, we believe every meal should be a celebration. Our chefs source the finest local and
+            international ingredients to craft dishes that not only taste incredible but tell a story of culture
+            and passion.
+          </p>
+          <div class="about-features">
+            <div class="feature-item">
+              <div class="feature-icon"><i class="bi bi-check2-circle"></i></div>
+              <div>
+                <strong>Fresh Ingredients Daily</strong>
+                <p>We source local produce every morning</p>
               </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><i class="bi bi-check2-circle"></i></div>
+              <div>
+                <strong>Master Chefs</strong>
+                <p>Trained in international culinary arts</p>
+              </div>
+            </div>
+            <div class="feature-item">
+              <div class="feature-icon"><i class="bi bi-check2-circle"></i></div>
+              <div>
+                <strong>Hygienic Kitchen</strong>
+                <p>ISO certified food safety standards</p>
+              </div>
+            </div>
+          </div>
+          <a href="#menu" class="btn-primary-custom">
+            <span>View Our Menu</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-              <div class="col-sm-6">
+  <!-- ========== STATS STRIP ========== -->
+  <section class="stats-section">
+    <div class="container">
+      <div class="row g-4 text-center">
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="0">
+          <div class="stat-card">
+            <div class="stat-icon">🍽️</div>
+            <h3 class="counter" data-target="12000">0</h3>
+            <p>Orders Delivered</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="100">
+          <div class="stat-card">
+            <div class="stat-icon">👨‍🍳</div>
+            <h3 class="counter" data-target="48">0</h3>
+            <p>Expert Chefs</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="200">
+          <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <h3 class="counter" data-target="8500">0</h3>
+            <p>5-Star Reviews</p>
+          </div>
+        </div>
+        <div class="col-6 col-md-3" data-aos="fade-up" data-aos-delay="300">
+          <div class="stat-card">
+            <div class="stat-icon">🌍</div>
+            <h3 class="counter" data-target="25">0</h3>
+            <p>Cities Covered</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-                <b>
-                  & Is foodies bread Really Baked fresh each Day
-                </b>
-                <p>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate tempore in fugiat officia
-                  voluptatem perspiciatis? Cumque odio ratione earum? Tenetur? Lorem ipsum dolor sit amet.
-                </p>
+  <!-- ========== TRENDING TODAY ========== -->
+  <section class="trending-section">
+    <div class="container">
+      <div class="section-header text-center" data-aos="fade-up">
+        <div class="section-tag">🔥 Hot Right Now</div>
+        <h2 class="section-title">Trending <span class="text-accent">Today</span></h2>
+        <p class="section-desc">Most ordered items in the last 24 hours</p>
+      </div>
+      <div class="trending-scroll" id="trendingScroll" data-aos="fade-up">
+        <!-- Populated by JS from menu API -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== MENU SECTION ========== -->
+  <section id="menu" class="menu-section">
+    <div class="container">
+      <div class="section-header text-center" data-aos="fade-up">
+        <div class="section-tag">Our Menu</div>
+        <h2 class="section-title">Explore Our <span class="text-accent">Signature</span> Dishes</h2>
+        <p class="section-desc">Handpicked recipes from around the globe, prepared with love and precision.</p>
+      </div>
+
+      <!-- Menu Search Bar -->
+      <div class="menu-search-wrap" data-aos="fade-up">
+        <div class="menu-search-box">
+          <i class="bi bi-search menu-search-icon"></i>
+          <input type="text" id="menuSearchInput" class="menu-search-input" placeholder="Search dishes, e.g. pizza, burger, chai...">
+          <button class="menu-search-clear" id="menuSearchClear" onclick="clearMenuSearch()" style="display:none;">
+            <i class="bi bi-x-lg"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Filter Tabs -->
+      <div class="menu-filter" data-aos="fade-up">
+        <button class="filter-btn active" data-filter="all">🍽️ All</button>
+        <button class="filter-btn" data-filter="fastfood">🍔 Fast Food</button>
+        <button class="filter-btn" data-filter="snacks">🥟 Snacks</button>
+        <button class="filter-btn" data-filter="meals">🍛 Meals</button>
+        <button class="filter-btn" data-filter="drinks">🥤 Drinks</button>
+        <button class="filter-btn" data-filter="desserts">🧁 Desserts</button>
+      </div>
+
+      <!-- Menu Cards — loaded dynamically from API -->
+      <div class="row g-4 menu-grid" id="menuGrid">
+        <!-- Loader -->
+        <div class="col-12 text-center py-5" id="menuLoader">
+          <div style="width:48px;height:48px;border:4px solid #e8e0d8;border-top-color:#c0392b;border-radius:50%;animation:spin 0.9s linear infinite;margin:0 auto 16px;"></div>
+          <p style="color:#999;">Loading menu...</p>
+        </div>
+      </div>
+
+      </div><!-- end menu-grid -->
+
+      <!-- View All Button -->
+      <div class="text-center mt-5" data-aos="fade-up">
+        <a href="#menu" class="btn-ghost-menu">
+          <span>View Full Menu</span>
+          <i class="bi bi-arrow-right"></i>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ========== CATEGORIES STRIP ========== -->
+  <section class="categories-section">
+    <div class="container">
+      <div class="section-header text-center" data-aos="fade-up">
+        <div class="section-tag">Browse By Type</div>
+        <h2 class="section-title">What Are You <span class="text-accent">Craving</span> Today?</h2>
+      </div>
+      <div class="categories-scroll" data-aos="fade-up">
+        <div class="cat-card" onclick="scrollToMenuFilter('fastfood')">
+          <div class="cat-icon">🍔</div>
+          <span>Fast Food</span>
+        </div>
+        <div class="cat-card" onclick="scrollToMenuFilter('meals')">
+          <div class="cat-icon">🍛</div>
+          <span>Meals</span>
+        </div>
+        <div class="cat-card" onclick="scrollToMenuFilter('snacks')">
+          <div class="cat-icon">🥟</div>
+          <span>Snacks</span>
+        </div>
+        <div class="cat-card" onclick="scrollToMenuFilter('drinks')">
+          <div class="cat-icon">🥤</div>
+          <span>Drinks</span>
+        </div>
+        <div class="cat-card" onclick="scrollToMenuFilter('desserts')">
+          <div class="cat-icon">🧁</div>
+          <span>Desserts</span>
+        </div>
+        <div class="cat-card" onclick="scrollToMenuFilter('all')">
+          <div class="cat-icon">🍽️</div>
+          <span>View All</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SPECIAL OFFER SECTION ========== -->
+  <section class="offer-section">
+    <div class="container">
+      <div class="offer-card" data-aos="zoom-in">
+        <div class="offer-content">
+          <span class="offer-tag">Limited Time Offer</span>
+          <h2>Get <span>25% OFF</span> Your First Order</h2>
+          <p>Use code <strong>FOODIES25</strong> at checkout. Valid for new customers only.</p>
+          <a href="#menu" class="btn-primary-custom">
+            <span>Claim Offer</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+        </div>
+        <div class="offer-image">
+          <img src="img/img/eat.jpg" alt="Special Offer">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== HOW IT WORKS ========== -->
+  <section class="how-section">
+    <div class="container">
+      <div class="section-header text-center" data-aos="fade-up">
+        <div class="section-tag">How It Works</div>
+        <h2 class="section-title">Order in <span class="text-accent">3 Simple</span> Steps</h2>
+      </div>
+      <div class="row g-4 mt-3">
+        <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="0">
+          <div class="step-card">
+            <div class="step-number">01</div>
+            <div class="step-icon"><i class="bi bi-search"></i></div>
+            <h4>Browse Menu</h4>
+            <p>Explore our wide range of delicious dishes and pick your favorites.</p>
+          </div>
+        </div>
+        <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="150">
+          <div class="step-card active">
+            <div class="step-number">02</div>
+            <div class="step-icon"><i class="bi bi-cart-check"></i></div>
+            <h4>Place Order</h4>
+            <p>Add to cart and checkout securely with your preferred payment method.</p>
+          </div>
+        </div>
+        <div class="col-md-4 text-center" data-aos="fade-up" data-aos-delay="300">
+          <div class="step-card">
+            <div class="step-number">03</div>
+            <div class="step-icon"><i class="bi bi-truck"></i></div>
+            <h4>Fast Delivery</h4>
+            <p>Your food arrives hot and fresh at your doorstep within 20 minutes.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== REVIEWS ========== -->
+  <section id="reviews" class="reviews-section">
+    <div class="container">
+      <div class="section-header text-center" data-aos="fade-up">
+        <div class="section-tag">Testimonials</div>
+        <h2 class="section-title">What Our <span class="text-accent">Customers</span> Say</h2>
+      </div>
+      <div class="row g-4 mt-3">
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
+          <div class="review-card">
+            <div class="review-stars">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <p class="review-text">"Absolutely incredible food. The momos are the best I've ever had — better than any restaurant in my city!"</p>
+            <div class="review-author">
+              <img src="img/review/e1.jpg" alt="John Doe">
+              <div>
+                <strong>John Doe</strong>
+                <span>Food Blogger</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="150">
+          <div class="review-card featured">
+            <div class="review-stars">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i>
+            </div>
+            <p class="review-text">"Foodies.com has completely changed my lunch routine. The delivery is always on time and the food is always perfect!"</p>
+            <div class="review-author">
+              <img src="img/review/e2.jpg" alt="Sarah Smith">
+              <div>
+                <strong>Sarah Smith</strong>
+                <span>Regular Customer</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
+          <div class="review-card">
+            <div class="review-stars">
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+              <i class="bi bi-star-half"></i>
+            </div>
+            <p class="review-text">"The pizza is out of this world. Thin, crispy, full of flavor. I order every Friday night without fail."</p>
+            <div class="review-author">
+              <img src="img/review/e3.jpg" alt="Michael Lee">
+              <div>
+                <strong>Michael Lee</strong>
+                <span>Verified Customer</span>
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-   </section>
+  </section>
 
-    <!-- question end -->
-     <!-- .offer start -->
-
-     <div class="row" style="background-color: #a82c48;">
-      <div class="col-sm-12 py-5 mt-3">
-        <div class="row text-center text-light">
-          <h1>
-            Hurry Up! Subscribe Our Newsletters And Get 25%
-            <br>
-            Off
-          </h1>
-          
-        <p>
-          Limited time offer for this month No credit card required
-        </p>
-         <label for=""> <input type="
-          text" name="" id="" placeholder=" Email Address here ">
-        <button>
-          Submit
-        </button></label>
-          
-        
-        
-
-
+  <!-- ========== FAQ ========== -->
+  <section id="faq" class="faq-section">
+    <div class="container">
+      <div class="row align-items-center g-5">
+        <div class="col-lg-5" data-aos="fade-right">
+          <div class="section-tag">FAQ</div>
+          <h2 class="section-title">Frequently Asked <span class="text-accent">Questions</span></h2>
+          <p class="section-desc">Can't find an answer? Call us at <strong>1800 180 2223</strong> — we're here 24/7.</p>
+          <a href="tel:18001802223" class="btn-primary-custom mt-3">
+            <i class="bi bi-telephone"></i>
+            <span>Call Us Now</span>
+          </a>
         </div>
-      </div>
-     </div>
-     <!-- .offer end -->
-
-
-
-
-    <!-- footer start -->
-    <footer class="text-center text-lg-start bg-light text-muted">
-      <!-- Section: Social media -->
-      <section class="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
-        <!-- Left -->
-        <div class="me-5 d-none d-lg-block fw-bold" style="color: #a82c48;">
-          <span>Get connected with us on social networks:</span>
-        </div>
-        <!-- Left -->
-
-
-
-
-
-
-
-
-
-        <!-- right -->
-        <!-- <div class="text-light">
-      <a href="" class="me-4 text-reset">
-<i class="fa-brands fa-facebook fa-2xl fa-shake" style="color: #f5510a;"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-  <i class="fa-brands fa-square-x-twitter fa-2xl fa-shake" style="color: #f5510a;"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-    <i class="fa-brands fa-google-plus fa-2xl fa-shake" style="color: #f5510a;"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-<i class="fa-brands fa-square-instagram fa-2xl fa-shake" style="color: #f5510a;"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-     <i class="fa-brands fa-linkedin fa-2xl fa-shake" style="color: #f5510a;"></i>
-      </a>
-      <a href="" class="me-4 text-reset">
-     <i class="fa-brands fa-github fa-2xl fa-shake" style="color: #f5510a;"></i>
-      </a>
-    </div> -->
-        <!-- Right -->
-      </section>
-      <!-- Section: Social media -->
-
-      <!-- Section: Links  -->
-      <section class="  py-3" style="background-color: #a82c48;">
-        <div class="container text-center text-md-start mt-5">
-          <!-- Grid row -->
-          <div class="row mt-3">
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4 text-light">
-              <!-- Content -->
-              <h3 class="text-uppercase fw-bold mb-4">
-               
-              FOODIES  <img src= "img/logo/logo.png" alt="logo" height="30px" width="50px"  />
-              </h3>
-              <p class="mt-3">
-               The taste of food makes your day best and and its taste is same of house
-              </p>
+        <div class="col-lg-7" data-aos="fade-left">
+          <div class="accordion faq-accordion" id="faqAccordion">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                  Is the food really baked fresh each day?
+                </button>
+              </h2>
+              <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Yes! Every item on our menu is prepared fresh daily. We never use pre-cooked or frozen ingredients. Our chefs start prepping at 6 AM every morning.
+                </div>
+              </div>
             </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4 text-light">
-              <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">
-                Quick Links
-              </h6>
-              </li>
-              <p>
-                <a href="#" class="text-reset" style="text-decoration: none; ">Home</a>
-              </p>
-              <p>
-                <a href="#" class="text-reset" style="text-decoration: none;">Services</a>
-              </p>
-              <p>
-                <a href="#" class="text-reset" style="text-decoration: none;">About Us</a>
-              </p>
-              <p>
-                <a href="#" class="text-reset" style="text-decoration: none;">Contact</a>
-              </p>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                  What are your delivery hours?
+                </button>
+              </h2>
+              <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  We deliver from 9:00 AM to 11:00 PM, 7 days a week including holidays. Late night delivery is available in select areas.
+                </div>
+              </div>
             </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4 text-light">
-              <!-- Links -->
-              <h6 class="text-uppercase fw-bold mb-4">
-                Our Services
-              </h6>
-              <p>
-                <a href="#!" class="text-reset " style="text-decoration: none;">Ready in 10 Minutes</a>
-              </p>Fast Home Delivery</a>
-              </p>
-              <p>
-                <a href="#!" class="text-reset " style="text-decoration: none;">Easy Return Policy</a>
-              </p>
-              <p>
-                <a href="#!" class="text-reset " style="text-decoration: none;">Discount offers</a>
-      
-
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                  Do you offer vegetarian and vegan options?
+                </button>
+              </h2>
+              <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Absolutely! Over 40% of our menu is fully vegetarian or vegan-friendly. All items are clearly labeled for dietary preferences.
+                </div>
+              </div>
             </div>
-            <!-- Grid column -->
-
-            <!-- Grid column -->
-            <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4 text-light">
-              <!-- Links -->
-              <a href="#">
-                <h6 class="text-uppercase fw-bold mb-4  text-light" >Contact Us</h6>
-              </a>
-              <p>123 Construction Avenue,
-                Building District, CA 90210
-              </p>
-              <p>
-                
-                info@foodies.com
-              </p>
-              <p>+91 7007575886</p>
-
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                  What payment methods do you accept?
+                </button>
+              </h2>
+              <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  We accept all major credit/debit cards, UPI, net banking, PayTM, and cash on delivery. All online payments are 100% secure.
+                </div>
+              </div>
             </div>
-            <!-- Grid column -->
-          </div>
-          <!-- Grid row -->
-        </div>
-      </section>
-      <!-- Section: Links  -->
-
-
-      <div class="row">
-        <div class="col-sm-12">
-          <div class="row mx-auto">
-            <div class="col-sm-12 mt-5">
-              <iframe
-                src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d114433.82255972829!2d77.65926677612303!3d26.32465517754342!3m2!1i1024!2i768!4f13.1!2m1!1ssoftpro%20lucknow!5e0!3m2!1sen!2sin!4v1752854475841!5m2!1sen!2sin"
-                width="100%" height="450" style="border-radius: 10px 10px 10px 10px;" allowfullscreen="" loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"></iframe>
-
-                
-
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                  Can I cancel or modify my order?
+                </button>
+              </h2>
+              <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+                <div class="accordion-body">
+                  Orders can be cancelled within 5 minutes of placing them. After that, modifications can be requested by calling our helpline.
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <hr style="color: aliceblue;">
-      <!-- Copyright -->
+    </div>
+  </section>
 
-      <div class="text-center p-4 fw-bold" style="background-color: rgba(0, 0, 0, 0.05); color: #a82c48;">
-        © 2025 FOODIES MAKE BODY . Designed and Developed by
-        <a class="text-warning fw-bold " href="https://mdbootstrap.com/">ANUJ GUPTA</a>
+  <!-- ========== NEWSLETTER ========== -->
+  <section class="newsletter-section">
+    <div class="container">
+      <div class="newsletter-inner" data-aos="zoom-in">
+        <div class="newsletter-bg-text">FOODIES</div>
+        <div class="section-tag">Stay Updated</div>
+        <h2>Subscribe &amp; Get <span class="text-accent">25% Off</span></h2>
+        <p>Join 10,000+ food lovers and get exclusive deals, new menu alerts, and recipes.</p>
+        <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+          <input type="email" placeholder="Enter your email address..." required>
+          <button type="submit">
+            <span>Subscribe</span>
+            <i class="bi bi-arrow-right"></i>
+          </button>
+        </form>
+        <p class="newsletter-note">No spam, unsubscribe anytime. 🔒 We respect your privacy.</p>
       </div>
-      <!-- Copyright -->
+    </div>
+  </section>
 
-    </footer>
+  <!-- ========== FOOTER ========== -->
+  <footer class="main-footer">
+    <div class="container">
+      <div class="footer-top">
+        <div class="row g-5">
+          <div class="col-lg-4">
+            <div class="footer-brand">
+              <span class="brand-text">FOODIES<span class="brand-dot">.</span>COM</span>
+            </div>
+            <p class="footer-about">
+              Delivering happiness one meal at a time. Crafted with love, served with speed. Your favorite food destination since 2015.
+            </p>
+            <div class="footer-social">
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-instagram"></i></a>
+              <a href="#"><i class="bi bi-twitter-x"></i></a>
+              <a href="#"><i class="bi bi-youtube"></i></a>
+              <a href="#"><i class="bi bi-whatsapp"></i></a>
+            </div>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <h6 class="footer-heading">Quick Links</h6>
+            <ul class="footer-links">
+              <li><a href="#home">Home</a></li>
+              <li><a href="#about">About Us</a></li>
+              <li><a href="#menu">Menu</a></li>
+              <li><a href="#reviews">Reviews</a></li>
+              <li><a href="#faq">FAQ</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div class="col-sm-6 col-lg-2">
+            <h6 class="footer-heading">Our Services</h6>
+            <ul class="footer-links">
+              <li><a href="#">Fast Delivery</a></li>
+              <li><a href="#">Catering</a></li>
+              <li><a href="#">Party Orders</a></li>
+              <li><a href="#">Subscriptions</a></li>
+              <li><a href="#">Gift Cards</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-4">
+            <h6 class="footer-heading">Contact Us</h6>
+            <div class="footer-contact">
+              <div class="contact-item">
+                <i class="bi bi-geo-alt-fill"></i>
+                <span>123 Food Street, Flavor District, CA 90210</span>
+              </div>
+              <div class="contact-item">
+                <i class="bi bi-envelope-fill"></i>
+                <span>info@foodies.com</span>
+              </div>
+              <div class="contact-item">
+                <i class="bi bi-telephone-fill"></i>
+                <span>+91 7007575886</span>
+              </div>
+              <div class="contact-item">
+                <i class="bi bi-clock-fill"></i>
+                <span>Mon–Sun: 9:00 AM – 11:00 PM</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
 
+      <!-- Map -->
+      <div class="footer-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d114433.82255972829!2d77.65926677612303!3d26.32465517754342!3m2!1i1024!2i768!4f13.1!2m1!1ssoftpro%20lucknow!5e0!3m2!1sen!2sin!4v1752854475841!5m2!1sen!2sin"
+          width="100%" height="350" style="border:0; border-radius:16px;" allowfullscreen loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
 
+      <div class="footer-bottom">
+        <p>© 2025 FOODIES.COM — All Rights Reserved. Designed &amp; Developed by <a href="#">Anuj Gupta</a></p>
+        <div class="footer-legal">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+          <a href="#">Cookie Policy</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 
-    <!-- footer end -->
+  <!-- ========== FOOD ITEM DETAIL MODAL ========== -->
+  <div class="modal fade" id="itemDetailModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content item-detail-modal">
+        <button class="item-detail-close" data-bs-dismiss="modal"><i class="bi bi-x-lg"></i></button>
+        <div class="row g-0">
+          <div class="col-md-5">
+            <div class="item-detail-img-wrap">
+              <img id="itemDetailImg" src="" alt="" class="item-detail-img">
+              <span class="item-detail-badge" id="itemDetailBadge"></span>
+            </div>
+          </div>
+          <div class="col-md-7">
+            <div class="item-detail-body">
+              <div class="item-detail-cat" id="itemDetailCat"></div>
+              <h3 class="item-detail-name" id="itemDetailName"></h3>
+              <div class="item-detail-meta">
+                <span id="itemDetailRating"><i class="bi bi-star-fill"></i> —</span>
+                <span id="itemDetailTime"><i class="bi bi-clock"></i> —</span>
+                <span id="itemDetailServes"><i class="bi bi-person"></i> —</span>
+              </div>
+              <p class="item-detail-desc" id="itemDetailDesc"></p>
+              <div class="item-detail-price-row">
+                <span class="item-detail-price" id="itemDetailPrice">₹0</span>
+                <span class="item-detail-orig" id="itemDetailOrig"></span>
+              </div>
+              <div class="item-detail-qty-row">
+                <button class="idq-btn" id="idqMinus" onclick="idqChange(-1)">−</button>
+                <span class="idq-num" id="idqNum">1</span>
+                <button class="idq-btn" id="idqPlus" onclick="idqChange(1)">+</button>
+              </div>
+              <div class="item-detail-actions">
+                <button class="btn-idm-cart" id="itemDetailAddBtn" onclick="addFromDetailModal()">
+                  <i class="bi bi-bag-plus"></i> Add to Cart — <span id="itemDetailTotal">₹0</span>
+                </button>
+                <button class="btn-idm-wish" id="itemDetailWishBtn" onclick="wishFromDetailModal()">
+                  <i class="bi bi-heart" id="idmHeartIcon"></i>
+                </button>
+              </div>
+              <!-- Food Photos Section -->
+              <div class="item-photos-section">
+                <div class="item-photos-header">
+                  <span>📸 Customer Photos</span>
+                  <label class="btn-add-photo" title="Add your photo">
+                    <i class="bi bi-camera-fill"></i> Add
+                    <input type="file" accept="image/*" style="display:none;" onchange="FoodPhotos.handleUpload(event, _detailItem?._id)">
+                  </label>
+                </div>
+                <div class="food-photos-grid" id="itemPhotosGrid"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-  <!-- end -->
-   
-  <script src="js/bootstrap.bundle.js"></script>
-  <script src="js/script.js"></script>
-  
-</body>
 
+  <!-- ========== LOYALTY POINTS WIDGET ========== -->
+  <div class="loyalty-widget" id="loyaltyWidget" style="display:none;">
+    <div class="loyalty-inner">
+      <div class="loyalty-icon">🏆</div>
+      <div class="loyalty-info">
+        <span class="loyalty-pts" id="loyaltyPtsDisplay">0</span>
+        <span class="loyalty-label">Loyalty Points</span>
+      </div>
+      <div class="loyalty-tip">≈ ₹<span id="loyaltyValue">0</span> off</div>
+    </div>
+  </div>
+
+  <!-- ========== CART SIDEBAR ========== -->
+  <div class="cart-overlay" id="cartOverlay" onclick="toggleCart()"></div>
+  <div class="cart-sidebar" id="cartSidebar">
+    <div class="cart-header">
+      <h5><i class="bi bi-bag"></i> Your Cart</h5>
+      <div style="display:flex;align-items:center;gap:8px;">
+        <button class="cart-share-btn" onclick="GroupOrder.copyLink()" title="Share cart with friends">
+          <i class="bi bi-people-fill"></i> Group
+        </button>
+        <button onclick="toggleCart()"><i class="bi bi-x-lg"></i></button>
+      </div>
+    </div>
+    <div class="cart-items" id="cartItems">
+      <div class="cart-empty">
+        <i class="bi bi-bag-x"></i>
+        <p>Your cart is empty</p>
+        <a href="#menu" onclick="toggleCart()">Browse Menu</a>
+      </div>
+    </div>
+    <div class="cart-footer" id="cartFooter" style="display:none;">
+      <div class="cart-total">
+        <span>Total:</span>
+        <strong id="cartTotal">₹0.00</strong>
+      </div>
+      <button class="btn-checkout" onclick="checkout()">
+        <i class="bi bi-lock-fill"></i> Proceed to Checkout
+      </button>
+    </div>
+  </div>
+
+  <!-- ========== TOAST NOTIFICATION ========== -->
+  <div class="toast-container position-fixed bottom-0 end-0 p-3">
+    <div id="cartToast" class="toast align-items-center" role="alert">
+      <div class="d-flex">
+        <div class="toast-body" id="toastMsg">Item added to cart!</div>
+        <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== AI CHATBOT ========== -->
+  <button class="chatbot-fab" id="chatbotFab" onclick="toggleChatbot()" title="Chat with FoodieBot">
+    <i class="bi bi-chat-dots-fill" id="chatFabIcon"></i>
+  </button>
+  <div class="chatbot-box" id="chatbotBox">
+    <div class="chatbot-header">
+      <div class="chatbot-header-info">
+        <div class="chatbot-avatar">🤖</div>
+        <div>
+          <strong>FoodieBot</strong>
+          <span class="chatbot-online">● Online</span>
+        </div>
+      </div>
+      <button onclick="toggleChatbot()" class="chatbot-close"><i class="bi bi-x-lg"></i></button>
+    </div>
+    <div class="chatbot-messages" id="chatMessages"></div>
+    <div class="chatbot-input-row">
+      <input type="text" id="chatInput" class="chatbot-input" placeholder="Ask me anything..." onkeydown="chatKeydown(event)">
+      <button class="chatbot-send" onclick="sendChat()"><i class="bi bi-send-fill"></i></button>
+    </div>
+  </div>
+
+  <!-- ========== REORDER TOAST ========== -->
+  <div id="reorderToast" style="display:none;position:fixed;bottom:90px;right:24px;z-index:9999;background:#d4edda;color:#155724;padding:13px 20px;border-radius:14px;font-weight:700;font-size:0.88rem;box-shadow:0 6px 20px rgba(0,0,0,0.12);border:1px solid #c3e6cb;align-items:center;gap:10px;">
+    ✅ Items added to cart!
+    <a href="checkout.html" style="color:#c0392b;font-weight:800;text-decoration:none;">Checkout →</a>
+  </div>
+
+  <!-- ========== DELIVERY MAP MODAL ========== -->
+  <div class="modal fade" id="deliveryMapModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content" style="border-radius:20px;overflow:hidden;border:none;">
+        <div class="modal-header" style="background:linear-gradient(135deg,#c0392b,#e74c3c);color:white;border:none;">
+          <h5 class="modal-title"><i class="bi bi-geo-alt-fill"></i> Live Delivery Tracking</h5>
+          <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" onclick="DeliveryMap.destroy()"></button>
+        </div>
+        <div class="modal-body" style="padding:0;">
+          <div id="deliveryMapEl" style="width:100%;height:400px;background:#f8f5f0;"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="backToTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+    <i class="bi bi-arrow-up"></i>
+  </button>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- AOS Animation -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Dark Mode -->
+  <script src="js/darkmode.js"></script>
+  <!-- Custom JS -->
+  <script src="js/script.js"></script>
+  <!-- New Modern Features -->
+  <script src="js/features.js"></script>
+</body>
 </html>

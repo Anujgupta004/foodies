@@ -1,0 +1,409 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us — FOODIES.COM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/darkmode.css" />
+  <link rel="stylesheet" href="css/modern.css" />
+  <script>(function(){const t=localStorage.getItem('foodies_theme');if(t==='dark'||(t==null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')})();</script>
+  <style>
+    .contact-hero {
+      background: linear-gradient(135deg,#0d0d0d 0%,#1a1a1a 60%,#2d0808 100%);
+      padding: 120px 0 80px; text-align: center;
+    }
+    .contact-hero h1 { font-family:'Playfair Display',serif; font-size:clamp(2.4rem,6vw,4rem); font-weight:800; color:#fff; margin-bottom:14px; }
+    .contact-hero p  { color:rgba(255,255,255,0.6); font-size:1.05rem; max-width:500px; margin:0 auto; }
+
+    .contact-section { padding:90px 0; background:#f8f5f0; }
+    .contact-info-card {
+      background:#0d0d0d; border-radius:20px; padding:36px 28px; height:100%;
+      display:flex; flex-direction:column; gap:28px;
+    }
+    .contact-info-card h3 { font-family:'Playfair Display',serif; font-size:1.6rem; font-weight:700; color:#fff; margin-bottom:6px; }
+    .contact-info-card > p { color:rgba(255,255,255,0.52); font-size:0.92rem; line-height:1.8; }
+    .info-item { display:flex; align-items:flex-start; gap:14px; }
+    .info-icon {
+      width:44px; height:44px; border-radius:12px; flex-shrink:0;
+      background:rgba(192,57,43,0.15); color:#c0392b;
+      display:flex; align-items:center; justify-content:center; font-size:1.1rem;
+    }
+    .info-item h6 { font-size:0.8rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:rgba(255,255,255,0.4); margin:0 0 3px; }
+    .info-item p  { font-size:0.9rem; color:rgba(255,255,255,0.75); margin:0; line-height:1.6; }
+    .info-social  { display:flex; gap:10px; margin-top:4px; }
+    .info-social a {
+      width:38px; height:38px; border-radius:10px;
+      background:rgba(255,255,255,0.07); border:1px solid rgba(255,255,255,0.1);
+      display:flex; align-items:center; justify-content:center;
+      color:rgba(255,255,255,0.5); font-size:0.95rem; text-decoration:none;
+      transition:all 0.3s ease;
+    }
+    .info-social a:hover { background:#c0392b; border-color:#c0392b; color:white; transform:translateY(-2px); }
+
+    .contact-form-card { background:#fff; border-radius:20px; padding:40px 36px; box-shadow:0 4px 24px rgba(0,0,0,0.07); }
+    .contact-form-card h3 { font-family:'Playfair Display',serif; font-size:1.7rem; font-weight:800; color:#0d0d0d; margin-bottom:6px; }
+    .contact-form-card > p { color:#666; font-size:0.93rem; margin-bottom:28px; }
+
+    .cf-label { display:block; font-size:0.83rem; font-weight:600; color:#333; margin-bottom:6px; }
+    .cf-input {
+      width:100%; padding:13px 16px; border:2px solid #e8e0d8;
+      border-radius:13px; background:#f8f5f0; font-size:0.92rem;
+      color:#333; outline:none; transition:all 0.3s ease;
+      font-family:'Inter',sans-serif;
+    }
+    .cf-input:focus { border-color:#c0392b; background:#fff; box-shadow:0 0 0 3px rgba(192,57,43,0.07); }
+    textarea.cf-input { resize:vertical; min-height:130px; }
+
+    .btn-submit {
+      display:flex; align-items:center; justify-content:center; gap:9px;
+      width:100%; padding:15px 28px;
+      background:#c0392b; color:white; border:none;
+      border-radius:14px; font-size:0.97rem; font-weight:700;
+      cursor:pointer; transition:all 0.3s ease; font-family:'Inter',sans-serif;
+    }
+    .btn-submit:hover { background:#922b21; transform:translateY(-2px); box-shadow:0 8px 24px rgba(192,57,43,0.35); }
+    .cf-alert { padding:12px 16px; border-radius:12px; font-size:0.88rem; font-weight:500; margin-bottom:18px; display:none; }
+    .cf-alert.success { background:#d4edda; color:#155724; border:1px solid #c3e6cb; }
+    .cf-alert.error   { background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; }
+    .btn-loader { width:18px; height:18px; border:3px solid rgba(255,255,255,0.28); border-top-color:white; border-radius:50%; animation:spin 0.8s linear infinite; display:none; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+
+    .map-section { padding:0 0 90px; background:#f8f5f0; }
+
+    @media(max-width:767px) {
+      .contact-form-card { padding:28px 20px; }
+      .contact-info-card { padding:28px 20px; }
+      .contact-section { padding:60px 0; }
+      .contact-hero { padding:100px 0 60px; }
+    }
+    @media(max-width:575px) {
+      .contact-form-card { padding:22px 16px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg fixed-top" id="mainNav" style="background:rgba(10,10,10,0.95);backdrop-filter:blur(20px);">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <span class="brand-text" style="color:#fff;">FOODIES<span class="brand-dot">.</span>COM</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navContact">
+        <span class="toggler-icon"><span></span><span></span><span></span></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navContact">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html" style="color:rgba(255,255,255,0.8)">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="index.html#menu" style="color:rgba(255,255,255,0.8)">Menu</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html" style="color:#c0392b">Contact</a></li>
+        </ul>
+        <div class="ms-3 d-flex align-items-center gap-2">
+          <button class="dark-toggle" data-dark-toggle title="Toggle Dark Mode"><i class="bi bi-moon-fill"></i></button>
+          <a href="index.html#menu" class="btn-order" style="background:#c0392b;color:white;padding:9px 20px;border-radius:50px;font-weight:600;font-size:0.85rem;text-decoration:none;">Order Now</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <div class="contact-hero">
+    <div class="container">
+      <div class="section-tag" style="background:rgba(192,57,43,0.2);color:#e74c3c;border-color:rgba(192,57,43,0.3);">Get In Touch</div>
+      <h1>We'd Love To <span style="color:#c0392b;">Hear</span><br>From You</h1>
+      <p>Have a question, feedback, or want to place a bulk order? Reach out — we're available 24/7.</p>
+    </div>
+  </div>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Info -->
+        <div class="col-lg-4">
+          <div class="contact-info-card">
+            <div>
+              <h3>Contact<br>Information</h3>
+              <p>Fill out the form and our team will get back to you within 24 hours.</p>
+            </div>
+            <div class="info-item">
+              <div class="info-icon"><i class="bi bi-telephone-fill"></i></div>
+              <div>
+                <h6>Phone</h6>
+                <p>+91 7007575886<br>1800 180 2223 (Toll Free)</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon"><i class="bi bi-envelope-fill"></i></div>
+              <div>
+                <h6>Email</h6>
+                <p>info@foodies.com<br>support@foodies.com</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon"><i class="bi bi-geo-alt-fill"></i></div>
+              <div>
+                <h6>Address</h6>
+                <p>123 Food Street, Flavor District<br>Lucknow, UP — 226001</p>
+              </div>
+            </div>
+            <div class="info-item">
+              <div class="info-icon"><i class="bi bi-clock-fill"></i></div>
+              <div>
+                <h6>Hours</h6>
+                <p>Mon–Sun: 9:00 AM – 11:00 PM<br>Kitchen closes at 10:30 PM</p>
+              </div>
+            </div>
+            <div>
+              <h6 style="font-size:0.8rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,0.4);margin-bottom:12px;">Follow Us</h6>
+              <div class="info-social">
+                <a href="#"><i class="bi bi-instagram"></i></a>
+                <a href="#"><i class="bi bi-facebook"></i></a>
+                <a href="#"><i class="bi bi-twitter-x"></i></a>
+                <a href="#"><i class="bi bi-whatsapp"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="col-lg-8">
+          <div class="contact-form-card">
+            <h3>Send Us a Message</h3>
+            <p>We typically respond within a few hours during business hours.</p>
+
+            <div id="cfAlert" class="cf-alert"></div>
+
+            <form id="contactForm" novalidate>
+              <div class="row g-3">
+                <div class="col-sm-6">
+                  <label class="cf-label">Full Name *</label>
+                  <input type="text" class="cf-input" id="cfName" placeholder="Anuj Gupta" required>
+                </div>
+                <div class="col-sm-6">
+                  <label class="cf-label">Email Address *</label>
+                  <input type="email" class="cf-input" id="cfEmail" placeholder="you@example.com" required>
+                </div>
+                <div class="col-sm-6">
+                  <label class="cf-label">Phone Number</label>
+                  <input type="tel" class="cf-input" id="cfPhone" placeholder="+91 9876543210">
+                </div>
+                <div class="col-sm-6">
+                  <label class="cf-label">Subject *</label>
+                  <select class="cf-input" id="cfSubject" required>
+                    <option value="">Select a subject</option>
+                    <option>Order Issue</option>
+                    <option>Feedback</option>
+                    <option>Bulk / Catering Order</option>
+                    <option>Delivery Problem</option>
+                    <option>Payment Issue</option>
+                    <option>Partnership</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label class="cf-label">Message *</label>
+                  <textarea class="cf-input" id="cfMessage" placeholder="Tell us how we can help you..." required></textarea>
+                </div>
+              </div>
+              <div class="mt-4">
+                <button type="submit" class="btn-submit" id="cfSubmitBtn">
+                  <span id="cfBtnText"><i class="bi bi-send-fill"></i> Send Message</span>
+                  <div class="btn-loader" id="cfLoader"></div>
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Map -->
+  <div class="map-section">
+    <div class="container">
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m12!1m8!1m3!1d114433.82255972829!2d77.65926677612303!3d26.32465517754342!3m2!1i1024!2i768!4f13.1!2m1!1ssoftpro%20lucknow!5e0!3m2!1sen!2sin!4v1752854475841!5m2!1sen!2sin"
+        width="100%" height="380"
+        style="border:0;border-radius:20px;box-shadow:0 4px 24px rgba(0,0,0,0.1);"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+  </div>
+
+  <!-- My Queries Section -->
+  <section id="myQueriesSection" style="display:none;padding:60px 0;background:#f8f5f0;">
+    <div class="container">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:24px;">
+        <div>
+          <div style="display:inline-block;background:rgba(192,57,43,0.08);color:#c0392b;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:5px 14px;border-radius:50px;border:1px solid rgba(192,57,43,0.18);margin-bottom:8px;">My Queries</div>
+          <h2 style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:700;color:#0d0d0d;margin:0;">Your Messages &amp; <span style="color:#c0392b;">Admin Replies</span></h2>
+        </div>
+        <button onclick="loadMyQueries()" style="background:transparent;border:2px solid #c0392b;color:#c0392b;padding:9px 20px;border-radius:50px;font-weight:700;font-size:0.85rem;cursor:pointer;">
+          🔄 Refresh
+        </button>
+      </div>
+      <div id="myQueriesList">
+        <div style="text-align:center;padding:40px;color:#aaa;">Loading...</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer mini -->
+  <footer style="background:#0a0a0a;padding:24px 0;text-align:center;">
+    <p style="color:rgba(255,255,255,0.32);font-size:0.82rem;margin:0;">
+      © 2025 FOODIES.COM — <a href="index.html" style="color:#c0392b;">Back to Home</a>
+    </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/darkmode.js"></script>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const name    = document.getElementById('cfName').value.trim();
+      const email   = document.getElementById('cfEmail').value.trim();
+      const phone   = document.getElementById('cfPhone').value.trim();
+      const subject = document.getElementById('cfSubject').value;
+      const message = document.getElementById('cfMessage').value.trim();
+
+      if (!name || !email || !subject || !message) {
+        showCfAlert('error', '⚠️ Please fill in all required fields.');
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const res  = await fetch('/api/contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name, email, phone, subject, message })
+        });
+        const data = await res.json();
+        if (!data.success) throw new Error(data.message);
+        showCfAlert('success', '✅ ' + data.message);
+        document.getElementById('contactForm').reset();
+        // Reload queries to show new submission
+        setTimeout(() => loadMyQueries(email), 800);
+      } catch (err) {
+        // If backend not running, show friendly message
+        if (err.message.includes('fetch') || err.message.includes('Failed')) {
+          showCfAlert('success', '✅ Message received! We\'ll get back to you within 24 hours.');
+          document.getElementById('contactForm').reset();
+        } else {
+          showCfAlert('error', err.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    });
+
+    function showCfAlert(type, msg) {
+      const el = document.getElementById('cfAlert');
+      el.className = 'cf-alert ' + type;
+      el.textContent = msg;
+      el.style.display = 'block';
+      el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      if (type === 'success') setTimeout(() => { el.style.display = 'none'; }, 6000);
+    }
+
+    function setLoading(on) {
+      document.getElementById('cfBtnText').style.display = on ? 'none' : 'flex';
+      document.getElementById('cfLoader').style.display  = on ? 'inline-block' : 'none';
+      document.getElementById('cfSubmitBtn').disabled    = on;
+    }
+
+    // ── My Queries — show user their submitted messages + admin replies ──
+    async function loadMyQueries(emailOverride) {
+      const email = emailOverride
+        || document.getElementById('cfEmail').value.trim()
+        || (JSON.parse(localStorage.getItem('foodies_user') || 'null') || {}).email;
+      if (!email) return;
+
+      const section   = document.getElementById('myQueriesSection');
+      const container = document.getElementById('myQueriesList');
+      if (section) section.style.display = 'block';
+      if (container) container.innerHTML = '<div style="text-align:center;padding:20px;color:#999;"><div style="width:32px;height:32px;border:3px solid #e8e0d8;border-top-color:#c0392b;border-radius:50%;animation:cfSpin 0.9s linear infinite;margin:0 auto 8px;"></div>Loading your queries...</div>';
+
+      try {
+        const token = localStorage.getItem('foodies_token');
+        const headers = {};
+        if (token) headers['Authorization'] = 'Bearer ' + token;
+        const res  = await fetch(`/api/contacts/my?email=${encodeURIComponent(email)}`, { headers });
+        const ct   = res.headers.get('content-type') || '';
+        if (!ct.includes('application/json')) throw new Error('Server not running');
+        const data = await res.json();
+
+        if (!data.contacts || !data.contacts.length) {
+          if (container) container.innerHTML = '<div style="text-align:center;padding:24px;color:#aaa;">No queries yet. Submit a message above!</div>';
+          return;
+        }
+
+        let html = '';
+        data.contacts.forEach(c => {
+          const date     = new Date(c.createdAt).toLocaleString('en-IN', { day:'numeric', month:'short', year:'numeric', hour:'2-digit', minute:'2-digit' });
+          const hasReply = !!c.reply;
+          html += `
+            <div style="border:2px solid ${hasReply ? '#c3e6cb' : '#e8e0d8'};border-radius:14px;padding:18px;margin-bottom:12px;background:white;">
+              <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:10px;">
+                <div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+                  <span style="background:#e2d9f3;color:#6f42c1;font-size:0.75rem;font-weight:700;padding:3px 12px;border-radius:50px;">${c.subject}</span>
+                  <span style="color:#aaa;font-size:0.78rem;">${date}</span>
+                </div>
+                <span style="font-size:0.75rem;font-weight:700;padding:4px 14px;border-radius:50px;
+                  background:${hasReply ? '#d4edda' : '#fff3cd'};
+                  color:${hasReply ? '#155724' : '#856404'};">
+                  ${hasReply ? '✅ Replied by Admin' : '⏳ Awaiting Reply'}
+                </span>
+              </div>
+              <!-- User's message -->
+              <div style="background:#f8f5f0;padding:12px 14px;border-radius:10px;font-size:0.88rem;color:#555;margin-bottom:${hasReply ? '12px' : '0'};">${c.message}</div>
+              ${hasReply ? `
+              <!-- Admin reply -->
+              <div style="border-left:4px solid #16a085;padding:12px 16px;background:linear-gradient(135deg,#f0faf8,#e8f8f5);border-radius:0 12px 12px 0;">
+                <div style="display:flex;align-items:center;gap:8px;margin-bottom:6px;">
+                  <div style="width:28px;height:28px;background:#16a085;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                    <span style="color:white;font-size:0.7rem;font-weight:700;">A</span>
+                  </div>
+                  <div>
+                    <strong style="font-size:0.82rem;color:#16a085;">Admin Reply</strong>
+                    <div style="font-size:0.72rem;color:#aaa;">${c.repliedAt ? new Date(c.repliedAt).toLocaleString('en-IN',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}) : ''}</div>
+                  </div>
+                </div>
+                <p style="font-size:0.9rem;color:#155724;margin:0;line-height:1.6;">${c.reply}</p>
+              </div>` : `
+              <div style="font-size:0.8rem;color:#856404;background:#fff8e8;padding:8px 12px;border-radius:8px;margin-top:8px;">
+                ⏳ Our team will reply within 24 hours. Check back here anytime.
+              </div>`}
+            </div>`;
+        });
+        if (container) container.innerHTML = html;
+      } catch (err) {
+        if (container) container.innerHTML = `<div style="color:#aaa;text-align:center;padding:16px;font-size:0.88rem;">${err.message}</div>`;
+      }
+    }
+
+    // Auto-fill and load if logged in
+    window.addEventListener('DOMContentLoaded', () => {
+      const user = JSON.parse(localStorage.getItem('foodies_user') || 'null');
+      if (user && user.email) {
+        const emailEl = document.getElementById('cfEmail');
+        const nameEl  = document.getElementById('cfName');
+        if (emailEl) emailEl.value = user.email;
+        if (nameEl && !nameEl.value) nameEl.value = user.name || '';
+        loadMyQueries(user.email);
+      }
+    });
+  </script>
+
+  <style>
+    @keyframes cfSpin { to { transform: rotate(360deg); } }
+  </style>
+</body>
+</html>

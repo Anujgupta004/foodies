@@ -1,0 +1,355 @@
+/* =============================================
+   FOODIES.COM — Dark Mode CSS
+   Applies when <html class="dark"> is set
+   ============================================= */
+
+html.dark {
+  /* ── Core colors ── */
+  --white:      #0f0f0f;
+  --off-white:  #1a1a1a;
+  --border:     #2a2a2a;
+  --text:       #e8e8e8;
+  --text-light: #aaaaaa;
+  --text-muted: #666666;
+  /* NOTE: --dark stays as-is because hero/footer use it for dark bg — we override per-section */
+}
+
+/* ── Body & Base ── */
+html.dark body { background:#0f0f0f; color:#e8e8e8; }
+html.dark a    { color:inherit; }
+
+/* ── Hero section — FORCE white text always (hero has dark bg) ── */
+html.dark .hero-section .hero-title      { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+html.dark .hero-section .hero-title-outline {
+  color: transparent !important;
+  -webkit-text-stroke: 2px #ffffff;
+  -webkit-text-fill-color: transparent !important;
+}
+html.dark .hero-section .hero-desc  { color: rgba(255,255,255,0.72) !important; }
+html.dark .hero-section .hero-tag   { color: rgba(255,255,255,0.88) !important; background: rgba(255,255,255,0.10) !important; }
+html.dark .hero-section .text-accent { color: #c0392b !important; -webkit-text-fill-color: #c0392b !important; }
+html.dark .stat-item h3 { color: #ffffff !important; -webkit-text-fill-color: #ffffff !important; }
+html.dark .stat-item p  { color: rgba(255,255,255,0.50) !important; }
+html.dark .hero-btns .btn-primary-custom { color: #fff !important; }
+html.dark .hero-btns .btn-ghost-custom   { color: rgba(255,255,255,0.85) !important; }
+
+/* ── NAVBAR — handled in modern.css ── */
+html.dark #navbarNav { background: rgba(6,6,6,0.97) !important; border: 1px solid rgba(255,255,255,0.06); }
+
+
+/* ── Preloader ── */
+html.dark #preloader          { background:#0f0f0f; }
+
+/* ── Hero ── */
+html.dark .hero-section        { background:#0a0a0a; }
+
+/* ── About ── */
+html.dark .about-section       { background:#0f0f0f; }
+html.dark .about-img-secondary { border-color:#1a1a1a; }
+html.dark .section-title       { color:#f0f0f0; }
+html.dark .section-desc        { color:#aaa; }
+html.dark .feature-item strong { color:#f0f0f0; }
+html.dark .feature-item p      { color:#888; }
+
+/* ── Stats ── */
+html.dark .stats-section       { background:#080808; }
+html.dark .stat-card           { background:rgba(255,255,255,0.03); border-color:rgba(255,255,255,0.05); }
+html.dark .stat-card:hover     { background:rgba(192,57,43,0.12); }
+
+/* ── Categories ── */
+html.dark .categories-section  { background:#0f0f0f; }
+html.dark .cat-card            { background:#1a1a1a; border-color:#2a2a2a; }
+html.dark .cat-card:hover      { background:#222; }
+html.dark .cat-icon            { background:#222; }
+html.dark .cat-card span       { color:#e0e0e0; }
+
+/* ── Menu Section ── */
+html.dark .menu-section        { background:#141414; }
+html.dark .filter-btn          { background:#1a1a1a; border-color:#2a2a2a; color:#aaa; }
+html.dark .filter-btn:hover,
+html.dark .filter-btn.active   { background:#c0392b; border-color:#c0392b; color:white; }
+html.dark .menu-card           { background:#1e1e1e; box-shadow:0 3px 16px rgba(0,0,0,0.3); }
+html.dark .menu-card:hover     { box-shadow:0 18px 48px rgba(0,0,0,0.5); }
+html.dark .menu-card-top h5    { color:#f0f0f0; }
+html.dark .menu-card-body > p  { color:#999; }
+html.dark .menu-rating         { background:#2a2200; color:#f39c12; }
+html.dark .btn-add-cart        { border-color:#c0392b; color:#e07060; }
+html.dark .btn-add-cart:hover  { background:#c0392b; color:white; }
+html.dark .quick-add           { background:#222; color:#f0f0f0; }
+html.dark .quick-add:hover     { background:#c0392b; color:white; }
+
+/* ── Offer Section ── */
+html.dark .offer-section       { background:#0f0f0f; }
+
+/* ── How It Works ── */
+html.dark .how-section         { background:#141414; }
+html.dark .step-card           { background:#1e1e1e; border-color:#2a2a2a; }
+html.dark .step-card h4        { color:#f0f0f0; }
+html.dark .step-card p         { color:#999; }
+html.dark .step-card.active    { background:#c0392b; }
+html.dark .step-card.active h4,
+html.dark .step-card.active p  { color:rgba(255,255,255,0.9); }
+
+/* ── Reviews ── */
+html.dark .reviews-section     { background:#0f0f0f; }
+html.dark .review-card         { background:#1e1e1e; border-color:#2a2a2a; }
+html.dark .review-card.featured{ background:#0a0a0a; }
+html.dark .review-text         { color:#aaa; }
+html.dark .review-author strong{ color:#f0f0f0; }
+
+/* ── FAQ ── */
+html.dark .faq-section                         { background:#141414; }
+html.dark .faq-accordion .accordion-item       { box-shadow:0 2px 10px rgba(0,0,0,0.3); }
+html.dark .faq-accordion .accordion-button     { background:#1e1e1e; color:#f0f0f0; }
+html.dark .faq-accordion .accordion-button:not(.collapsed) { background:#c0392b; color:white; }
+html.dark .faq-accordion .accordion-body       { background:#1a1a1a; color:#aaa; }
+
+/* ── Newsletter ── */
+html.dark .newsletter-section  { background:#080808; }
+
+/* ── Footer ── */
+html.dark .main-footer         { background:#050505; }
+
+/* ── Cart Sidebar ── */
+html.dark .cart-sidebar        { background:#1a1a1a; }
+html.dark .cart-header         { border-color:#2a2a2a; }
+html.dark .cart-header h5      { color:#f0f0f0; }
+html.dark .cart-header button  { background:#222; color:#aaa; }
+html.dark .cart-header button:hover { background:#c0392b; color:white; }
+html.dark .cart-item-row       { border-color:#2a2a2a; }
+html.dark .cart-item-name      { color:#f0f0f0; }
+html.dark .qty-btn             { background:#222; border-color:#333; color:#f0f0f0; }
+html.dark .qty-btn:hover       { background:#c0392b; border-color:#c0392b; color:white; }
+html.dark .cart-footer         { background:#141414; border-color:#2a2a2a; }
+html.dark .cart-total strong   { color:#f0f0f0; }
+html.dark .cart-empty          { color:#666; }
+
+/* ── Toast ── */
+html.dark #cartToast           { background:#1a1a1a; border-color:#333; }
+
+/* ── Modals (Bootstrap) ── */
+html.dark .modal-content       { background:#1a1a1a; border-color:#2a2a2a; }
+html.dark .modal-header        { border-color:#2a2a2a; background:#1e1e1e; }
+html.dark .modal-footer        { border-color:#2a2a2a; background:#1e1e1e; }
+html.dark .modal-title         { color:#f0f0f0; }
+html.dark .btn-close           { filter:invert(1) brightness(0.7); }
+
+/* ── Scrollbar ── */
+html.dark ::-webkit-scrollbar-track { background:#1a1a1a; }
+html.dark ::-webkit-scrollbar-thumb { background:#c0392b; }
+
+/* =============================================
+   DASHBOARD PAGES DARK MODE
+   (orders, profile, wishlist)
+   ============================================= */
+html.dark .dash-sidebar        { background:#0a0a0a; }
+html.dark .dash-brand          { border-color:rgba(255,255,255,0.05); }
+html.dark .dash-nav-item       { color:rgba(255,255,255,0.4); }
+html.dark .dash-nav-item:hover { background:rgba(255,255,255,0.04); color:rgba(255,255,255,0.8); }
+html.dark .dash-nav-item.active{ background:#c0392b; color:white; }
+html.dark .dash-sidebar-footer { border-color:rgba(255,255,255,0.05); }
+
+html.dark .dash-main           { background:#0f0f0f; }
+html.dark .dash-topbar         { background:#141414; border-color:#2a2a2a; box-shadow:0 1px 8px rgba(0,0,0,0.4); }
+html.dark .dash-topbar h2      { color:#f0f0f0; }
+html.dark .sidebar-toggle      { background:#1e1e1e; color:#aaa; }
+html.dark .sidebar-toggle:hover{ background:#c0392b; color:white; }
+
+html.dark .order-filter-tabs   { background:#141414; border-color:#2a2a2a; }
+html.dark .tab-btn             { background:transparent; border-color:#2a2a2a; color:#888; }
+html.dark .tab-btn.active,
+html.dark .tab-btn:hover       { background:#c0392b; border-color:#c0392b; color:white; }
+
+html.dark .order-card          { background:#1a1a1a; border-color:#2a2a2a; box-shadow:0 2px 10px rgba(0,0,0,0.3); }
+html.dark .order-card:hover    { border-color:rgba(192,57,43,0.3); box-shadow:0 6px 20px rgba(0,0,0,0.5); }
+html.dark .order-id            { color:#f0f0f0; }
+html.dark .order-date          { color:#666; }
+html.dark .order-items-list    { color:#888; }
+html.dark .order-card-footer   { border-color:#2a2a2a; }
+
+html.dark .dash-card           { background:#1a1a1a; box-shadow:0 3px 16px rgba(0,0,0,0.3); }
+html.dark .dash-card-title     { color:#f0f0f0; border-color:#2a2a2a; }
+html.dark .profile-card        { background:#1a1a1a; box-shadow:0 3px 16px rgba(0,0,0,0.3); }
+html.dark .profile-card h4     { color:#f0f0f0; }
+html.dark .profile-stats       { border-color:#2a2a2a; }
+html.dark .profile-stats span  { color:#888; }
+html.dark .avatar-hint         { color:#555; }
+
+html.dark .co-label            { color:#e0e0e0; }
+html.dark .co-input            { background:#222; border-color:#333; color:#f0f0f0; }
+html.dark .co-input:focus      { background:#1a1a1a; border-color:#c0392b; }
+html.dark .co-input::placeholder { color:#555; }
+
+html.dark .dash-loader         { background:#0f0f0f; }
+html.dark .orders-empty        { color:#555; }
+html.dark .orders-empty h4     { color:#888; }
+html.dark .orders-empty a      { color:#c0392b; }
+
+html.dark .dash-overlay.show   { background:rgba(0,0,0,0.7); }
+html.dark .dash-modal          { background:#1a1a1a; }
+html.dark .dash-modal .modal-header { background:#1e1e1e; border-color:#2a2a2a; }
+html.dark .dash-modal .modal-title  { color:#f0f0f0; }
+html.dark .dash-modal .modal-body   { background:#1a1a1a; color:#ccc; }
+html.dark .dash-modal .modal-footer { background:#1e1e1e; border-color:#2a2a2a; }
+html.dark .detail-item-row     { border-color:#2a2a2a; color:#ddd; }
+html.dark .detail-total-row    { color:#888; }
+html.dark .detail-total-row.grand { color:#f0f0f0; border-color:#2a2a2a; }
+
+/* Tracker */
+html.dark .tracker-dot         { background:#222; border-color:#333; color:#666; }
+html.dark .tracker-line        { background:#2a2a2a; }
+html.dark .tracker-label       { color:#666; }
+
+/* ── ADMIN DARK MODE ── */
+html.dark .admin-sidebar        { background:#050505; }
+html.dark .admin-main           { background:#0f0f0f; }
+html.dark .admin-topbar         { background:#141414; border-color:#2a2a2a; }
+html.dark .admin-topbar h3      { color:#f0f0f0; }
+html.dark .admin-user           { color:#888; }
+html.dark .admin-user strong    { color:#f0f0f0; }
+html.dark .admin-panel          { background:#0f0f0f; }
+html.dark .admin-card           { background:#1a1a1a; box-shadow:0 2px 12px rgba(0,0,0,0.3); }
+html.dark .admin-card-header    { border-color:#2a2a2a; }
+html.dark .admin-card-header h5 { color:#f0f0f0; }
+html.dark .stat-box             { background:#1a1a1a; box-shadow:0 2px 12px rgba(0,0,0,0.3); }
+html.dark .stat-box h3          { color:#f0f0f0; }
+html.dark .stat-box p           { color:#888; }
+html.dark .admin-table thead th { background:#111; color:#666; border-color:#2a2a2a; }
+html.dark .admin-table tbody td { border-color:#222; color:#e0e0e0; }
+html.dark .admin-table tbody tr:hover td { background:rgba(192,57,43,0.05); }
+html.dark .status-select        { background:#222; border-color:#333; color:#e0e0e0; }
+
+/* ── AUTH PAGES DARK MODE ── */
+html.dark .auth-right           { background:#141414; }
+html.dark .auth-form-box h1     { color:#f0f0f0; }
+html.dark .auth-subtitle        { color:#888; }
+html.dark .form-group label     { color:#ddd; }
+html.dark .input-wrap input     { background:#1e1e1e; border-color:#333; color:#f0f0f0; }
+html.dark .input-wrap input:focus { background:#222; border-color:#c0392b; }
+html.dark .input-wrap input::placeholder { color:#555; }
+html.dark .input-wrap > i:first-child { color:#666; }
+html.dark .toggle-pass          { color:#666; }
+html.dark .form-check-custom label { color:#888; }
+html.dark .demo-creds           { background:#1e1700; border-color:#3a2f00; }
+html.dark .demo-creds p         { color:#a08020; }
+html.dark .demo-creds code      { color:#f0f0f0; }
+html.dark .auth-divider         { color:#555; }
+html.dark .auth-divider::before,
+html.dark .auth-divider::after  { background:#2a2a2a; }
+html.dark .auth-switch          { color:#888; }
+
+/* ── CHECKOUT DARK MODE ── */
+html.dark .co-nav               { background:#141414; box-shadow:0 2px 14px rgba(0,0,0,0.4); }
+html.dark .co-logo              { color:#f0f0f0; }
+html.dark body.checkout-body,
+html.dark .co-container         { background:#0f0f0f; }
+html.dark .co-card              { background:#1a1a1a; box-shadow:0 3px 16px rgba(0,0,0,0.3); }
+html.dark .co-card-header       { border-color:#2a2a2a; }
+html.dark .co-card-header h4    { color:#f0f0f0; }
+html.dark .co-card-header p     { color:#666; }
+html.dark .co-card-icon         { background:rgba(192,57,43,0.15); }
+html.dark .co-input             { background:#222; border-color:#333; color:#f0f0f0; }
+html.dark .co-input:focus       { background:#1a1a1a; }
+html.dark .co-input::placeholder { color:#555; }
+html.dark .co-summary           { background:#1a1a1a; box-shadow:0 3px 16px rgba(0,0,0,0.3); }
+html.dark .co-summary-title     { color:#f0f0f0; border-color:#2a2a2a; }
+html.dark .co-item-row          { border-color:#2a2a2a; }
+html.dark .co-item-name         { color:#f0f0f0; }
+html.dark .co-total-row         { color:#888; }
+html.dark .total-row            { color:#f0f0f0; border-color:#2a2a2a; }
+html.dark .payment-option       { border-color:#2a2a2a; }
+html.dark .payment-option.active,
+html.dark .payment-option:has(input:checked) { background:rgba(192,57,43,0.08); border-color:#c0392b; }
+html.dark .payment-option strong { color:#f0f0f0; }
+html.dark .payment-option span  { color:#666; }
+html.dark .razorpay-note        { background:#1e1e1e; color:#888; }
+html.dark .co-step              { color:#555; }
+html.dark .co-step span         { background:#222; color:#555; }
+html.dark .co-step.active       { color:#c0392b; }
+html.dark .co-step.active span  { background:#c0392b; color:white; }
+html.dark .co-step-line         { background:#2a2a2a; }
+
+/* ── CONTACT PAGE DARK MODE ── */
+html.dark .contact-form-card    { background:#1a1a1a; }
+html.dark .contact-form-card h3 { color:#f0f0f0; }
+html.dark .contact-form-card > p { color:#888; }
+html.dark .cf-label             { color:#ddd; }
+html.dark .cf-input             { background:#222; border-color:#333; color:#f0f0f0; }
+html.dark .cf-input:focus       { background:#1a1a1a; border-color:#c0392b; }
+html.dark .cf-input::placeholder { color:#555; }
+html.dark .contact-section      { background:#141414; }
+html.dark .map-section          { background:#141414; }
+
+/* ── Wishlist ── */
+html.dark .wish-card            { background:#1a1a1a!important; }
+html.dark .wish-body h5         { color:#f0f0f0; }
+
+/* Dark Toggle Button */
+.dark-toggle {
+  background: none;
+  border: 1.5px solid rgba(255,255,255,0.25);
+  color: rgba(255,255,255,0.85);
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  backdrop-filter: blur(8px);
+}
+.dark-toggle:hover {
+  background: rgba(192,57,43,0.25);
+  border-color: rgba(192,57,43,0.6);
+  color: #fff;
+  transform: scale(1.08);
+}
+/* Light mode scrolled — dark icon */
+#mainNav.scrolled .dark-toggle {
+  border-color: rgba(0,0,0,0.15);
+  color: #444;
+}
+#mainNav.scrolled .dark-toggle:hover {
+  background: rgba(192,57,43,0.10);
+  border-color: #c0392b;
+  color: #c0392b;
+}
+/* Dark mode scrolled — light icon */
+html.dark #mainNav.scrolled .dark-toggle {
+  border-color: rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.75);
+}
+html.dark #mainNav.scrolled .dark-toggle:hover {
+  background: rgba(192,57,43,0.25);
+  border-color: rgba(192,57,43,0.5);
+  color: #fff;
+}
+
+/* Dashboard sidebar dark toggle */
+.dash-dark-toggle {
+  display: flex; align-items: center; gap: 10px;
+  padding: 12px 24px;
+  color: rgba(255,255,255,0.5);
+  cursor: pointer;
+  font-size: 0.88rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: none; background: none; width: 100%; text-align: left;
+}
+.dash-dark-toggle:hover { color: white; background: rgba(255,255,255,0.05); }
+.dash-dark-toggle i { width: 18px; text-align: center; }
+
+/* ── Smooth transition for dark mode switch ── */
+body,
+.menu-card, .step-card, .review-card, .stat-card, .cat-card,
+.cart-sidebar, .cart-footer, .cart-header,
+.dash-sidebar, .dash-topbar, .dash-card, .profile-card, .order-card,
+.admin-sidebar, .admin-topbar, .admin-card, .stat-box,
+.co-nav, .co-card, .co-summary,
+.auth-right, .contact-form-card,
+.faq-accordion .accordion-button,
+.faq-accordion .accordion-body,
+.faq-accordion .accordion-item,
+.co-input, .cf-input, input, textarea, select {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}

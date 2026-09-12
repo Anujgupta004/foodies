@@ -1,0 +1,134 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Wishlist — FOODIES.COM</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/dashboard.css"/>
+  <link rel="stylesheet" href="css/darkmode.css"/>
+  <link rel="stylesheet" href="css/modern.css" />
+  <script>(function(){const t=localStorage.getItem('foodies_theme');if(t==='dark'||(t==null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')})();</script>
+  <style>
+    .wish-card { background:white; border-radius:16px; overflow:hidden; box-shadow:0 3px 16px rgba(0,0,0,0.06); transition:all 0.3s ease; height:100%; }
+    .wish-card:hover { transform:translateY(-4px); box-shadow:0 12px 32px rgba(0,0,0,0.1); }
+    .wish-img { width:100%; height:180px; object-fit:cover; }
+    .wish-body { padding:16px; }
+    .wish-body h5 { font-family:'Playfair Display',serif; font-size:1rem; font-weight:700; margin-bottom:6px; }
+    .wish-price { font-size:1.1rem; font-weight:800; color:#c0392b; }
+    .wish-remove { background:none; border:none; color:#e74c3c; font-size:0.82rem; cursor:pointer; padding:0; }
+    .wish-remove:hover { text-decoration:underline; }
+    .btn-add { background:#c0392b; color:white; border:none; padding:9px 18px; border-radius:10px; font-weight:700; font-size:0.85rem; cursor:pointer; transition:all 0.3s; width:100%; margin-top:8px; }
+    .btn-add:hover { background:#922b21; }
+    @keyframes slideInRight { from{opacity:0;transform:translateX(30px)} to{opacity:1;transform:translateX(0)} }
+  </style>
+</head>
+<body>
+<div class="dash-layout">
+  <div class="dash-overlay" id="dashOverlay" onclick="toggleSidebar()"></div>
+  <aside class="dash-sidebar" id="sidebar">
+    <div class="dash-brand">FOODIES<span>.</span>COM</div>
+    <nav class="dash-nav">
+      <a href="index.html"    class="dash-nav-item"><i class="bi bi-house-fill"></i> Home</a>
+      <a href="orders.html"   class="dash-nav-item"><i class="bi bi-bag-check-fill"></i> My Orders</a>
+      <a href="profile.html"  class="dash-nav-item"><i class="bi bi-person-fill"></i> Profile</a>
+      <a href="wishlist.html" class="dash-nav-item active"><i class="bi bi-heart-fill"></i> Wishlist</a>
+      <a href="#" class="dash-nav-item" onclick="logout()"><i class="bi bi-box-arrow-right"></i> Logout</a>
+      <div class="admin-nav-divider"></div>
+      <button class="dash-dark-toggle" data-dark-toggle><i class="bi bi-moon-fill"></i> Dark Mode</button>
+    </nav>
+    <div class="dash-sidebar-footer"><div class="dash-user-info" id="sidebarUser"></div></div>
+  </aside>
+
+  <main class="dash-main">
+    <div class="dash-topbar">
+      <button class="sidebar-toggle" onclick="toggleSidebar()"><i class="bi bi-list"></i></button>
+      <h2>❤️ My Wishlist</h2>
+      <a href="index.html#menu" class="btn-order-now"><i class="bi bi-plus-lg"></i> Add More</a>
+    </div>
+
+    <div style="padding:16px 16px 32px;">
+      <div id="wishlistEmpty" style="display:none;text-align:center;padding:80px 20px;color:#aaa;">
+        <i class="bi bi-heart" style="font-size:4rem;display:block;margin-bottom:16px;color:#e8e0d8;"></i>
+        <h4 style="font-family:'Playfair Display',serif;color:#333;">Your wishlist is empty</h4>
+        <p style="margin-bottom:20px;">Save items you love by clicking the ❤️ on any menu item.</p>
+        <a href="index.html#menu" style="background:#c0392b;color:white;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:700;">Browse Menu</a>
+      </div>
+      <div class="row g-4" id="wishlistGrid"></div>
+    </div>
+  </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="js/darkmode.js"></script>
+<script>
+  const token = localStorage.getItem('foodies_token');
+  const user  = JSON.parse(localStorage.getItem('foodies_user') || 'null');
+  if (!token || !user) window.location.href = 'login.html';
+
+  const sbu = document.getElementById('sidebarUser');
+  if (sbu) sbu.innerHTML = `<strong>${user.name}</strong>${user.email}`;
+
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('dashOverlay').classList.toggle('show');
+  }
+  function logout() {
+    localStorage.removeItem('foodies_token');
+    localStorage.removeItem('foodies_user');
+    window.location.href = 'index.html';
+  }
+
+  // Wishlist stored in localStorage as array of item objects
+  function getWishlist() { return JSON.parse(localStorage.getItem('foodies_wishlist') || '[]'); }
+  function saveWishlist(list) { localStorage.setItem('foodies_wishlist', JSON.stringify(list)); }
+
+  function renderWishlist() {
+    const list  = getWishlist();
+    const grid  = document.getElementById('wishlistGrid');
+    const empty = document.getElementById('wishlistEmpty');
+    if (!list.length) { empty.style.display='block'; grid.innerHTML=''; return; }
+    empty.style.display = 'none';
+    grid.innerHTML = list.map((item,i) => `
+      <div class="col-12 col-sm-6 col-lg-4" id="witem_${i}">
+        <div class="wish-card">
+          <img src="${item.image||'img/img/type1.jpg'}" class="wish-img" alt="${item.name}" onerror="this.src='img/img/type1.jpg'">
+          <div class="wish-body">
+            <h5>${item.name}</h5>
+            <p style="font-size:0.82rem;color:#888;margin-bottom:8px;">${item.category||''}</p>
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
+              <span class="wish-price">₹${item.price}</span>
+              <button class="wish-remove" onclick="removeFromWishlist(${i})"><i class="bi bi-trash"></i> Remove</button>
+            </div>
+            <button class="btn-add" onclick="addToCartFromWishlist('${item.name.replace(/'/g,"\\'")}',${item.price})">
+              <i class="bi bi-bag-plus"></i> Add to Cart
+            </button>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  function removeFromWishlist(idx) {
+    const list = getWishlist();
+    list.splice(idx, 1);
+    saveWishlist(list);
+    renderWishlist();
+  }
+
+  function addToCartFromWishlist(name, price) {
+    let cart = JSON.parse(localStorage.getItem('foodies_cart') || '[]');
+    const ex = cart.find(i => i.name === name);
+    if (ex) ex.qty++; else cart.push({ name, price, qty: 1 });
+    localStorage.setItem('foodies_cart', JSON.stringify(cart));
+    const btn = event.target;
+    btn.textContent = '✅ Added!';
+    btn.style.background = '#16a085';
+    setTimeout(() => { btn.innerHTML = '<i class="bi bi-bag-plus"></i> Add to Cart'; btn.style.background = '#c0392b'; }, 1500);
+  }
+
+  renderWishlist();
+</script>
+</body>
+</html>
