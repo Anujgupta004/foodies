@@ -162,7 +162,15 @@ async function placeOrder() {
         paymentMethod,
         subtotal,
         discount: discount + loyaltyDiscount,
-        couponCode: couponApplied ? document.getElementById('couponInput').value.trim().toUpperCase() : ''
+        couponCode: couponApplied ? document.getElementById('couponInput').value.trim().toUpperCase() : '',
+        scheduledFor: (() => {
+          const scheduleToggle = document.getElementById('scheduleToggle');
+          const scheduleInput  = document.getElementById('scheduleDateTime');
+          if (scheduleToggle && scheduleToggle.checked && scheduleInput && scheduleInput.value) {
+            return scheduleInput.value; // ISO string or datetime-local value
+          }
+          return null;
+        })()
       })
     });
     if (!orderData.success) throw new Error(orderData.message);

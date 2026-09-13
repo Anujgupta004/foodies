@@ -205,7 +205,8 @@ function handleMe(req, res) {
   const user = authMiddleware(req);
   if (!user) return json(res, 401, { success:false, message:'Not authorized' });
   const { password, ...u } = user;
-  json(res, 200, { success:true, user: u });
+  // Include loyalty points from DB (fallback 0)
+  json(res, 200, { success:true, user: { ...u, loyaltyPoints: u.loyaltyPoints || 0 } });
 }
 
 // ── PUT /api/auth/profile ─────────────────────────
@@ -314,14 +315,21 @@ function handleDeleteMenuItem(req, res, id) {
 async function handlePlaceOrder(req, res) {
   const user = authMiddleware(req);
   if (!user) return json(res, 401, { success:false, message:'Login required' });
-  const { items, deliveryAddress, paymentMethod, subtotal, discount, couponCode } = await readBody(req);
+  const { items, deliveryAddress, paymentMethod, subtotal, discount, couponCode, scheduledFor } = await readBody(req);
   if (!items || !items.length) return json(res, 400, { success:false, message:'Cart is empty' });
 
   let discountAmt = discount || 0;
   if (couponCode === 'FOODIES25' && discountAmt === 0) discountAmt = Math.round(subtotal * 0.25);
   const deliveryCharge = subtotal >= 500 ? 0 : 40;
   const total          = subtotal + deliveryCharge - discountAmt;
-  const eta            = new Date(Date.now() + 30 * 60000).toISOString();
+
+  // Scheduled delivery support
+  let eta;
+  if (scheduledFor) {
+    try { eta = new Date(scheduledFor).toISOString(); } catch(_) { eta = new Date(Date.now() + 30 * 60000).toISOString(); }
+  } else {
+    eta = new Date(Date.now() + 30 * 60000).toISOString();
+  }
 
   const order = {
     _id: uid(), user: user._id, userName: user.name,
@@ -329,13 +337,15 @@ async function handlePlaceOrder(req, res) {
     subtotal, deliveryCharge, discount: discountAmt, total,
     paymentStatus: paymentMethod === 'cod' ? 'pending' : 'pending',
     status: 'placed', estimatedDelivery: eta,
+    scheduledFor: scheduledFor || null,
+    isScheduled:  !!scheduledFor,
     createdAt: new Date().toISOString()
   };
 
   const db = readDB();
   db.orders.push(order);
   writeDB(db);
-  json(res, 201, { success:true, message:'Order placed', order });
+  json(res, 201, { success:true, message: scheduledFor ? `Order scheduled for ${new Date(scheduledFor).toLocaleString('en-IN')}` : 'Order placed', order });
 }
 
 // ── GET /api/orders/my ────────────────────────────
@@ -454,16 +464,24 @@ async function handleVerifyPayment(req, res) {
   const idx = db.orders.findIndex(o => o._id === orderId);
   if (idx === -1) return json(res, 404, { success:false, message:'Order not found' });
 
-  // If simulated payment (no real keys), auto-verify
   db.orders[idx].paymentStatus     = 'paid';
   db.orders[idx].status            = 'confirmed';
   db.orders[idx].razorpayPaymentId = razorpay_payment_id || 'simulated';
+
+  // ── Award Loyalty Points (1 point per ₹10 spent) ──
+  const earnedPts = Math.floor((db.orders[idx].total || 0) / 10);
+  const uIdx = db.users.findIndex(u => u._id === user._id);
+  if (uIdx !== -1) {
+    db.users[uIdx].loyaltyPoints = (db.users[uIdx].loyaltyPoints || 0) + earnedPts;
+    db.orders[idx].loyaltyEarned = earnedPts;
+  }
+
   writeDB(db);
 
   // WhatsApp notification
   sendWhatsAppNotification(db.orders[idx], user, 'Razorpay (Online) ✅');
 
-  json(res, 200, { success:true, message:'Payment verified', order: db.orders[idx] });
+  json(res, 200, { success:true, message:'Payment verified', order: db.orders[idx], loyaltyEarned: earnedPts });
 }
 
 // ── POST /api/payment/cod-confirm ────────────────
@@ -475,12 +493,21 @@ async function handleCodConfirm(req, res) {
   const idx = db.orders.findIndex(o => o._id === orderId);
   if (idx === -1) return json(res, 404, { success:false, message:'Order not found' });
   db.orders[idx].status = 'confirmed';
+
+  // ── Award Loyalty Points for COD orders ──
+  const earnedPts = Math.floor((db.orders[idx].total || 0) / 10);
+  const uIdx = db.users.findIndex(u => u._id === user._id);
+  if (uIdx !== -1) {
+    db.users[uIdx].loyaltyPoints = (db.users[uIdx].loyaltyPoints || 0) + earnedPts;
+    db.orders[idx].loyaltyEarned = earnedPts;
+  }
+
   writeDB(db);
 
   // WhatsApp notification
   sendWhatsAppNotification(db.orders[idx], user, 'Cash on Delivery 💵');
 
-  json(res, 200, { success:true, message:'COD confirmed', order: db.orders[idx] });
+  json(res, 200, { success:true, message:'COD confirmed', order: db.orders[idx], loyaltyEarned: earnedPts });
 }
 
 // ── GET /api/admin/dashboard ──────────────────────
@@ -628,6 +655,32 @@ function handleDeleteContact(req, res, id) {
   db.contacts.splice(idx, 1);
   writeDB(db);
   json(res, 200, { success:true, message:'Deleted' });
+}
+
+// ═══════════ LOYALTY POINTS ═══════════
+function handleLoyaltyBalance(req, res) {
+  const user = authMiddleware(req);
+  if (!user) return json(res, 401, { success:false, message:'Login required' });
+  const db   = readDB();
+  const u    = db.users.find(x => x._id === user._id);
+  const pts  = u ? (u.loyaltyPoints || 0) : 0;
+  json(res, 200, { success:true, points: pts, rupeesValue: Math.floor(pts / 10) });
+}
+
+async function handleLoyaltyRedeem(req, res) {
+  const user = authMiddleware(req);
+  if (!user) return json(res, 401, { success:false, message:'Login required' });
+  const { pointsToRedeem } = await readBody(req);
+  if (!pointsToRedeem || pointsToRedeem < 100) return json(res, 400, { success:false, message:'Minimum 100 points required to redeem' });
+  const db  = readDB();
+  const idx = db.users.findIndex(u => u._id === user._id);
+  if (idx === -1) return json(res, 404, { success:false, message:'User not found' });
+  const current = db.users[idx].loyaltyPoints || 0;
+  if (current < pointsToRedeem) return json(res, 400, { success:false, message:`Insufficient points. You have ${current} points.` });
+  db.users[idx].loyaltyPoints = current - pointsToRedeem;
+  writeDB(db);
+  const rupeesOff = Math.floor(pointsToRedeem / 10);
+  json(res, 200, { success:true, message:`Redeemed ${pointsToRedeem} points = ₹${rupeesOff} off!`, rupeesOff, remaining: db.users[idx].loyaltyPoints });
 }
 
 // ═══════════ PROMO CODES ═══════════
@@ -857,6 +910,10 @@ const server = http.createServer(async (req, res) => {
     if (pathname === '/api/newsletter/subscribe'  && method === 'POST')  return handleNewsletterSubscribe(req, res);
     if (pathname === '/api/contact'               && method === 'POST')  return handleContact(req, res);
     if (pathname === '/api/contacts/my'           && method === 'GET')   return handleMyContacts(req, res);
+
+    // Loyalty Points
+    if (pathname === '/api/loyalty/balance'       && method === 'GET')   return handleLoyaltyBalance(req, res);
+    if (pathname === '/api/loyalty/redeem'        && method === 'POST')  return handleLoyaltyRedeem(req, res);
 
     // Promo codes
     if (pathname === '/api/promos'                     && method === 'GET')    return handleGetPromos(req, res);

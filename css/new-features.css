@@ -1,0 +1,472 @@
+/* ================================================================
+   FOODIES.COM — New Features CSS v2
+   Advanced Filters, Live Reviews, Recommendations,
+   Recently Viewed, Order Status Toast, Cart Upsell
+   ================================================================ */
+
+/* ── Advanced Filter Button ──────────────────────────────────── */
+.menu-search-wrap {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.adv-filter-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--white);
+  border: 2px solid var(--border);
+  color: var(--text);
+  padding: 10px 18px;
+  border-radius: 50px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  white-space: nowrap;
+  position: relative;
+}
+.adv-filter-btn:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+  background: rgba(192,57,43,0.04);
+}
+.adv-filter-count {
+  position: absolute;
+  top: -7px;
+  right: -7px;
+  background: var(--primary);
+  color: white;
+  font-size: 0.62rem;
+  font-weight: 700;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Advanced Filter Panel ───────────────────────────────────── */
+.adv-filter-panel {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.35s ease, padding 0.3s ease;
+  margin-bottom: 0;
+}
+.adv-filter-panel.open {
+  max-height: 200px;
+  margin-bottom: 18px;
+}
+.adv-filter-inner {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 20px;
+  align-items: center;
+  background: var(--off-white);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px 20px;
+}
+.adv-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.adv-filter-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+.adv-chip {
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  color: var(--text);
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.adv-chip:hover {
+  border-color: var(--primary);
+  color: var(--primary);
+}
+.adv-chip.adv-active {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: white;
+  font-weight: 600;
+}
+.adv-reset-btn {
+  background: transparent;
+  border: 1.5px solid #e74c3c;
+  color: #e74c3c;
+  padding: 5px 14px;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.adv-reset-btn:hover {
+  background: #e74c3c;
+  color: white;
+}
+
+/* ── Recommended For You ─────────────────────────────────────── */
+.recommend-section {
+  padding: 60px 0;
+  background: linear-gradient(135deg, #fff8f5 0%, #fff 100%);
+}
+.rec-card {
+  background: var(--white);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  cursor: pointer;
+  transition: transform 0.28s ease, box-shadow 0.28s ease;
+}
+.rec-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 10px 30px rgba(192,57,43,0.15);
+}
+.rec-card-img-wrap {
+  position: relative;
+  height: 140px;
+  overflow: hidden;
+}
+.rec-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.rec-card:hover .rec-card-img-wrap img {
+  transform: scale(1.08);
+}
+.rec-badge {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: linear-gradient(135deg, #8e44ad, #c0392b);
+  color: white;
+  font-size: 0.65rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 50px;
+  letter-spacing: 0.5px;
+}
+.rec-card-body {
+  padding: 12px;
+}
+.rec-name {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.rec-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.rec-price {
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+.rec-rating {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
+.rec-rating i {
+  color: #f39c12;
+  font-size: 0.7rem;
+}
+.rec-add-btn {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 8px;
+  border-radius: 10px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.rec-add-btn:hover {
+  background: var(--primary-dark);
+}
+
+/* ── Recently Viewed ─────────────────────────────────────────── */
+.recently-viewed-section {
+  padding: 30px 0 50px;
+}
+.rv-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+.rv-clear-btn {
+  background: transparent;
+  border: 1.5px solid var(--border);
+  color: var(--text-light);
+  padding: 6px 14px;
+  border-radius: 50px;
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.rv-clear-btn:hover {
+  border-color: #e74c3c;
+  color: #e74c3c;
+}
+.recently-viewed-wrap {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scrollbar-width: none;
+}
+.recently-viewed-wrap::-webkit-scrollbar { display: none; }
+.recent-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--white);
+  border: 1.5px solid var(--border);
+  border-radius: 50px;
+  padding: 6px 14px 6px 6px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+}
+.recent-chip:hover {
+  border-color: var(--primary);
+  box-shadow: 0 4px 16px rgba(192,57,43,0.12);
+  transform: translateY(-2px);
+}
+.recent-chip img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.recent-chip-info {
+  display: flex;
+  flex-direction: column;
+}
+.recent-chip-name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--dark);
+  white-space: nowrap;
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.recent-chip-price {
+  font-size: 0.75rem;
+  color: var(--primary);
+  font-weight: 700;
+}
+
+/* ── Order Status Toast ──────────────────────────────────────── */
+.order-status-toast {
+  position: fixed;
+  top: 80px;
+  right: 20px;
+  z-index: 99999;
+  transform: translateX(130%);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  max-width: 340px;
+}
+.order-status-toast.show {
+  transform: translateX(0);
+}
+.ost-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: var(--white);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--primary);
+  border-radius: 16px;
+  padding: 14px 16px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.14);
+}
+.ost-icon {
+  font-size: 1.6rem;
+  flex-shrink: 0;
+}
+.ost-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.ost-text strong {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--dark);
+}
+.ost-text span {
+  font-size: 0.76rem;
+  color: var(--text-light);
+}
+.ost-link {
+  color: var(--primary);
+  font-size: 0.82rem;
+  font-weight: 700;
+  text-decoration: none;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.ost-link:hover { color: var(--primary-dark); }
+.ost-close {
+  background: none;
+  border: none;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0 0 0 4px;
+  flex-shrink: 0;
+}
+
+/* ── Cart Upsell Bubble ──────────────────────────────────────── */
+.upsell-bubble {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 9998;
+  max-width: 280px;
+  background: var(--white);
+  border-radius: 18px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+  transform: translateY(30px);
+  opacity: 0;
+  transition: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.upsell-bubble.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+.upsell-close {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  background: rgba(0,0,0,0.08);
+  border: none;
+  border-radius: 50%;
+  width: 22px;
+  height: 22px;
+  font-size: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text);
+}
+.upsell-img-wrap img {
+  width: 100%;
+  height: 100px;
+  object-fit: cover;
+}
+.upsell-info {
+  padding: 12px 14px;
+}
+.upsell-label {
+  font-size: 0.72rem;
+  color: #8e44ad;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 2px;
+}
+.upsell-name {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--dark);
+  margin-bottom: 2px;
+}
+.upsell-price {
+  font-size: 0.85rem;
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.upsell-add {
+  width: 100%;
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 9px;
+  border-radius: 10px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.upsell-add:hover { background: var(--primary-dark); }
+
+/* ── Live Review Avatar Initials ─────────────────────────────── */
+.review-avatar-initials {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: white;
+  flex-shrink: 0;
+}
+
+/* ── Dark Mode Overrides ─────────────────────────────────────── */
+html.dark .adv-filter-inner       { background: rgba(255,255,255,0.04); border-color: rgba(255,255,255,0.1); }
+html.dark .adv-chip               { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
+html.dark .adv-filter-btn         { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.15); color: rgba(255,255,255,0.8); }
+html.dark .rec-card               { background: #1e1e1e; }
+html.dark .recent-chip            { background: #1e1e1e; border-color: rgba(255,255,255,0.1); }
+html.dark .ost-content            { background: #1e1e1e; border-color: rgba(255,255,255,0.1); }
+html.dark .upsell-bubble          { background: #1e1e1e; border-color: rgba(255,255,255,0.1); }
+
+/* ── Responsive ──────────────────────────────────────────────── */
+@media (max-width: 576px) {
+  .menu-search-wrap     { flex-direction: column; align-items: stretch; }
+  .adv-filter-btn       { width: 100%; justify-content: center; }
+  .adv-filter-inner     { gap: 8px 12px; padding: 12px 14px; }
+  .order-status-toast   { top: 70px; right: 10px; left: 10px; max-width: none; }
+  .upsell-bubble        { right: 10px; left: 10px; max-width: none; bottom: 80px; }
+  .recently-viewed-section { padding: 20px 0 30px; }
+}

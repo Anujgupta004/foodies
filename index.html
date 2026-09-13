@@ -24,6 +24,7 @@
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/darkmode.css" />
   <link rel="stylesheet" href="css/modern.css" />
+  <link rel="stylesheet" href="css/new-features.css" />
   <!-- Apply dark mode before render to prevent flash -->
   <script>
     (function(){const t=localStorage.getItem('foodies_theme');if(t==='dark'||(t==null&&window.matchMedia('(prefers-color-scheme:dark)').matches))document.documentElement.classList.add('dark')})();
@@ -275,6 +276,34 @@
     </div>
   </section>
 
+  <!-- ========== RECOMMENDED FOR YOU ========== -->
+  <section id="recommendSection" class="recommend-section" style="display:none;">
+    <div class="container">
+      <div class="section-header text-center" data-aos="fade-up">
+        <div class="section-tag">✨ Just For You</div>
+        <h2 class="section-title">Recommended <span class="text-accent">For You</span></h2>
+        <p class="section-desc">Based on your order history</p>
+      </div>
+      <div class="row g-3 mt-2" id="recommendGrid"></div>
+    </div>
+  </section>
+
+  <!-- ========== RECENTLY VIEWED ========== -->
+  <section id="recentlyViewedSection" class="recently-viewed-section" style="display:none;">
+    <div class="container">
+      <div class="rv-header" data-aos="fade-up">
+        <div>
+          <span class="section-tag" style="font-size:0.7rem;">👁️ History</span>
+          <h3 class="section-title" style="font-size:1.4rem;margin-bottom:0;">Recently <span class="text-accent">Viewed</span></h3>
+        </div>
+        <button class="rv-clear-btn" onclick="localStorage.removeItem('foodies_recent');document.getElementById('recentlyViewedSection').style.display='none';">
+          <i class="bi bi-x-circle"></i> Clear
+        </button>
+      </div>
+      <div class="recently-viewed-wrap" id="recentlyViewedWrap" data-aos="fade-up"></div>
+    </div>
+  </section>
+
   <!-- ========== MENU SECTION ========== -->
   <section id="menu" class="menu-section">
     <div class="container">
@@ -292,6 +321,34 @@
           <button class="menu-search-clear" id="menuSearchClear" onclick="clearMenuSearch()" style="display:none;">
             <i class="bi bi-x-lg"></i>
           </button>
+        </div>
+        <!-- Advanced Filter Toggle -->
+        <button class="adv-filter-btn" onclick="toggleAdvFilter()" title="Advanced Filters">
+          <i class="bi bi-sliders"></i> Filters
+          <span class="adv-filter-count" id="advFilterCount" style="display:none;"></span>
+        </button>
+      </div>
+
+      <!-- Advanced Filter Panel -->
+      <div class="adv-filter-panel" id="advFilterPanel">
+        <div class="adv-filter-inner">
+          <div class="adv-filter-group">
+            <span class="adv-filter-label">🥗 Diet</span>
+            <button class="adv-chip" data-adv-filter="diet" data-adv-val="veg"    onclick="advFilter('diet','veg')">🟢 Veg</button>
+            <button class="adv-chip" data-adv-filter="diet" data-adv-val="nonveg" onclick="advFilter('diet','nonveg')">🔴 Non-Veg</button>
+          </div>
+          <div class="adv-filter-group">
+            <span class="adv-filter-label">💰 Price</span>
+            <button class="adv-chip" data-adv-filter="price" data-adv-val="u150"  onclick="advFilter('price','u150')">Under ₹150</button>
+            <button class="adv-chip" data-adv-filter="price" data-adv-val="u300"  onclick="advFilter('price','u300')">Under ₹300</button>
+            <button class="adv-chip" data-adv-filter="price" data-adv-val="u500"  onclick="advFilter('price','u500')">Under ₹500</button>
+          </div>
+          <div class="adv-filter-group">
+            <span class="adv-filter-label">⭐ Rating</span>
+            <button class="adv-chip" data-adv-filter="rating" data-adv-val="4"    onclick="advFilter('rating','4')">4★ & above</button>
+            <button class="adv-chip" data-adv-filter="rating" data-adv-val="4.5"  onclick="advFilter('rating','4.5')">4.5★ & above</button>
+          </div>
+          <button class="adv-reset-btn" onclick="advFilterReset()"><i class="bi bi-arrow-counterclockwise"></i> Reset</button>
         </div>
       </div>
 
@@ -425,8 +482,10 @@
       <div class="section-header text-center" data-aos="fade-up">
         <div class="section-tag">Testimonials</div>
         <h2 class="section-title">What Our <span class="text-accent">Customers</span> Say</h2>
+        <p class="section-desc" id="reviewsAvgRating">Real reviews from real food lovers</p>
       </div>
-      <div class="row g-4 mt-3">
+      <!-- Live reviews injected by JS; static fallback below -->
+      <div class="row g-4 mt-3" id="liveReviewsGrid">
         <div class="col-md-4" data-aos="fade-up" data-aos-delay="0">
           <div class="review-card">
             <div class="review-stars">
@@ -830,9 +889,13 @@
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <!-- Dark Mode -->
   <script src="js/darkmode.js"></script>
+  <!-- API helper -->
+  <script src="js/api.js"></script>
   <!-- Custom JS -->
   <script src="js/script.js"></script>
-  <!-- New Modern Features -->
+  <!-- Modern Features Bundle v1 -->
   <script src="js/features.js"></script>
+  <!-- New Trending Features v2 -->
+  <script src="js/new-features.js"></script>
 </body>
 </html>
