@@ -533,6 +533,43 @@ function handleAdminDashboard(req, res) {
   json(res, 200, { success:true, stats:{ totalOrders, totalRevenue, totalUsers, totalItems, pendingOrders }, recentOrders });
 }
 
+// ── GET /api/admin/revenue ────────────────────────
+function handleAdminRevenue(req, res, urlObj) {
+  const user = authMiddleware(req);
+  if (!user || user.role !== 'admin') return json(res, 403, { success:false, message:'Admin only' });
+  const days  = parseInt(urlObj.searchParams.get('days') || '7');
+  const since = new Date(Date.now() - days * 24 * 60 * 60 * 1000);
+  const db    = readDB();
+  // Group qualifying orders by date
+  const map = {};
+  db.orders
+    .filter(o => {
+      const d = new Date(o.createdAt);
+      if (d < since) return false;
+      return o.paymentStatus === 'paid' || (o.paymentMethod === 'cod' && o.status === 'delivered');
+    })
+    .forEach(o => {
+      const day = o.createdAt.slice(0, 10);
+      if (!map[day]) map[day] = { _id: day, total: 0, count: 0 };
+      map[day].total += o.total;
+      map[day].count += 1;
+    });
+  const revenue = Object.values(map).sort((a, b) => a._id.localeCompare(b._id));
+  json(res, 200, { success: true, revenue });
+}
+
+// ── GET /api/admin/orders (all) ───────────────────
+function handleAdminAllOrders(req, res, urlObj) {
+  const user = authMiddleware(req);
+  if (!user || user.role !== 'admin') return json(res, 403, { success:false, message:'Admin only' });
+  const db     = readDB();
+  const status = urlObj.searchParams.get('status');
+  let orders   = db.orders.slice().sort((a,b) => new Date(b.createdAt) - new Date(a.createdAt));
+  if (status) orders = orders.filter(o => o.status === status);
+  orders = orders.map(o => ({ ...o, user: db.users.find(u => u._id === o.user) || { name:'Guest', email:'' } }));
+  json(res, 200, { success: true, total: orders.length, orders });
+}
+
 // ── GET /api/admin/users ──────────────────────────
 function handleAdminUsers(req, res) {
   const user = authMiddleware(req);
@@ -899,6 +936,8 @@ const server = http.createServer(async (req, res) => {
 
     // Admin
     if (pathname === '/api/admin/dashboard'       && method === 'GET')   return handleAdminDashboard(req, res);
+    if (pathname === '/api/admin/revenue'         && method === 'GET')   return handleAdminRevenue(req, res, urlObj);
+    if (pathname === '/api/admin/orders'          && method === 'GET')   return handleAdminAllOrders(req, res, urlObj);
     if (pathname === '/api/admin/users'           && method === 'GET')   return handleAdminUsers(req, res);
     if (pathname.match(/\/api\/admin\/users\/[^/]+\/toggle$/) && method === 'PUT') return handleToggleUser(req, res, pathname.split('/')[4]);
     if (pathname === '/api/admin/contacts'        && method === 'GET')   return handleGetContacts(req, res);

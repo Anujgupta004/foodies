@@ -72,8 +72,9 @@ window.addEventListener('scroll', () => {
 });
 
 // ===== LOAD MENU FROM API =====
-let allMenuItems = [];
-let currentMenuFilter = 'all';
+// Use var (not let) so window.allMenuItems is accessible from new-features.js
+var allMenuItems = [];
+var currentMenuFilter = 'all';
 
 async function loadMenuFromAPI() {
   try {
@@ -229,14 +230,31 @@ function addLoyaltyPoints(orderTotal) {
 // Show loyalty widget on homepage if user is logged in and has points
 function initLoyaltyWidget() {
   const token  = localStorage.getItem('foodies_token');
-  const pts    = getLoyaltyPoints();
   const widget = document.getElementById('loyaltyWidget');
   if (!widget) return;
-  if (token && pts > 0) {
-    document.getElementById('loyaltyPtsDisplay').textContent = pts.toLocaleString();
-    document.getElementById('loyaltyValue').textContent = Math.floor(pts / 10);
-    widget.style.display = 'block';
+
+  // Sync DB points into localStorage if user is logged in
+  if (token) {
+    fetch('/api/loyalty/balance', { headers: { Authorization: 'Bearer ' + token } })
+      .then(r => r.json()).then(d => {
+        if (d.success && d.points > 0) {
+          localStorage.setItem('foodies_points', d.points);
+          _renderLoyaltyWidget(widget, d.points);
+        }
+      }).catch(() => {
+        // fallback to localStorage
+        const pts = getLoyaltyPoints();
+        if (pts > 0) _renderLoyaltyWidget(widget, pts);
+      });
   }
+}
+
+function _renderLoyaltyWidget(widget, pts) {
+  const ptsEl = document.getElementById('loyaltyPtsDisplay');
+  const valEl = document.getElementById('loyaltyValue');
+  if (ptsEl) ptsEl.textContent = pts.toLocaleString();
+  if (valEl) valEl.textContent = Math.floor(pts / 10);
+  widget.style.display = 'block';
 }
 
 // ===== MENU SEARCH =====
